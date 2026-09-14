@@ -1,5 +1,10 @@
 # Changelog — MindGuardLabs drop
 
+## v6 — Social Engine correct (2026-09-14)
+
+Rewrite Social Engine demo to three labeled variants: **Set-and-done** (3–7×/week, Feed/Stories/Google Business, ghostwriter), **Gmail photo dump → 3 posts that week** (ghostwriter), **Note → post** (photo ~20s / reel 2–10 min via Gmail). Bonus block ($400+/mo support, engagement+strategy, soft websites/ads/apps). Package $1,997 bullets + FAQ aligned. DM→lead quiet one-liner only.
+
+
 ## v3 — Modules convert (2026-09-14)
 
 Full rewrite for conversion. Every module 0–12 from the Hermes brief.

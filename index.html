@@ -339,38 +339,45 @@
           <div class="feature-head">
             <div>
               <p class="eyebrow">Maps → Social Engine · System steps 6–7 · not inside Intensive by default</p>
-              <h3>Social Engine — three ways it pays</h3>
-              <p>Homeowners look you up after a quote. Empty grid = distrust. Pick a lane: approve once, dump job photos into Gmail for a 3×/week cadence (or Boost), or speak a job into a Gmail-ready image + brand-tone ghostwriter.</p>
+              <h3>Social Engine — three ways it runs</h3>
+              <p>Homeowners look you up after a quote. Empty grid = distrust. Social Engine keeps the shop visible with a <strong>ghostwriter</strong> on every lane: <strong>set-and-done</strong> auto posts (3–7×/week, stories/feed/Google Business), a <strong>Gmail photo dump</strong> that becomes 3 posts that week, or a photo/voice note that lands as a Gmail package ready to post (~20s photo or 2–10 min reel).</p>
             </div>
             <span class="price-pill">$1,997</span>
           </div>
 
           <div class="social-switcher" role="tablist" aria-label="Social Engine variants" id="social-variant-tabs">
-            <button type="button" class="social-tab active" role="tab" id="tab-social-a" data-social-tab="a" aria-selected="true" aria-controls="social-variant-a" tabindex="0">A · Approve → post</button>
-            <button type="button" class="social-tab" role="tab" id="tab-social-b" data-social-tab="b" aria-selected="false" aria-controls="social-variant-b" tabindex="-1">B · Gmail photo dump</button>
-            <button type="button" class="social-tab" role="tab" id="tab-social-c" data-social-tab="c" aria-selected="false" aria-controls="social-variant-c" tabindex="-1">C · Gmail ghostwriter</button>
+            <button type="button" class="social-tab active" role="tab" id="tab-social-a" data-social-tab="a" aria-selected="true" aria-controls="social-variant-a" tabindex="0">1 · Set &amp; done</button>
+            <button type="button" class="social-tab" role="tab" id="tab-social-b" data-social-tab="b" aria-selected="false" aria-controls="social-variant-b" tabindex="-1">2 · Gmail dump</button>
+            <button type="button" class="social-tab" role="tab" id="tab-social-c" data-social-tab="c" aria-selected="false" aria-controls="social-variant-c" tabindex="-1">3 · Note → post</button>
           </div>
 
-          <!-- Variant A -->
+          <!-- Variant 1 — Set-and-done auto posts -->
           <div class="social-variant active" id="social-variant-a" data-social-panel="a" role="tabpanel" aria-labelledby="tab-social-a">
-            <p class="variant-lede"><strong>Approve → multi-platform board.</strong> Job photo + caption → IG / FB / Google in one tap.</p>
-            <div class="social-board" id="social-board">
+            <p class="variant-lede"><strong>Set-and-done auto posts.</strong> Set it once; it runs. Auto posts <strong>3–7× per week</strong> to stories, feed, whatever fits the shop — includes a <strong>ghostwriter</strong>, and can keep <strong>Google Business</strong> moving too.</p>
+            <div class="social-board set-done-board" id="social-board">
               <div class="social-draft">
                 <div class="job-photo" aria-hidden="true">
-                  <span>Job photo</span>
-                  <span class="job-photo-sub">AC install · Newnan</span>
+                  <span>Ghostwriter preview</span>
+                  <span class="job-photo-sub">Brand-tone caption · ready</span>
                 </div>
-                <label class="caption-label" for="social-caption">Caption draft</label>
+                <label class="caption-label" for="social-caption">Ghostwriter caption</label>
                 <textarea id="social-caption" rows="3" readonly>Just wrapped a full system swap in Coweta County. Clean attic work, same-day cool. Grateful for the trust — call or text when you’re ready.</textarea>
+                <p class="set-done-status" id="set-done-status" role="status">Status: <strong>set &amp; done</strong> · running on your cadence</p>
               </div>
               <div class="social-controls">
-                <p class="ba-label">Post to</p>
-                <div class="platform-toggles" role="group" aria-label="Platforms">
-                  <button type="button" class="toggle on" data-platform="ig" aria-pressed="true">IG</button>
-                  <button type="button" class="toggle on" data-platform="fb" aria-pressed="true">FB</button>
-                  <button type="button" class="toggle" data-platform="google" aria-pressed="false">Google</button>
+                <p class="ba-label">Cadence</p>
+                <div class="cadence-chips platform-toggles" role="group" aria-label="Posts per week" id="set-cadence">
+                  <button type="button" class="toggle" data-cadence="3" aria-pressed="false">3× / week</button>
+                  <button type="button" class="toggle on" data-cadence="5" aria-pressed="true">5× / week</button>
+                  <button type="button" class="toggle" data-cadence="7" aria-pressed="false">7× / week</button>
                 </div>
-                <button type="button" class="btn btn-primary" id="social-approve">Approve &amp; Schedule</button>
+                <p class="ba-label">Destinations</p>
+                <div class="platform-toggles" role="group" aria-label="Destinations" id="set-destinations">
+                  <button type="button" class="toggle on" data-dest="feed" aria-pressed="true">Feed</button>
+                  <button type="button" class="toggle on" data-dest="stories" aria-pressed="true">Stories</button>
+                  <button type="button" class="toggle on" data-dest="google" aria-pressed="true">Google Business</button>
+                </div>
+                <button type="button" class="btn btn-primary" id="social-set-done">Set &amp; done</button>
                 <p class="toast" id="social-toast" hidden role="status"></p>
                 <div class="calendar-chips" id="calendar-chips" aria-live="polite"></div>
                 <p class="faint">Custom system · Social Engine $1,997 — not bundled in Intensive by default.</p>
@@ -380,9 +387,9 @@
             </div>
           </div>
 
-          <!-- Variant B -->
+          <!-- Variant 2 — Gmail photo dump → 3 posts that week -->
           <div class="social-variant" id="social-variant-b" data-social-panel="b" role="tabpanel" aria-labelledby="tab-social-b" hidden>
-            <p class="variant-lede"><strong>Gmail photo dump → posts on cadence.</strong> Owner dumps job photos into Gmail → AI turns them into posts → schedules <strong>3× per week</strong>, or toggle <strong>Boost performance</strong> for higher cadence.</p>
+            <p class="variant-lede"><strong>Gmail photo dump → 3 posts that week.</strong> Owner dumps photos into Gmail. AI makes <strong>3 posts that week</strong> from the dump — with a <strong>ghostwriter</strong> (same as set-and-done).</p>
             <div class="lead-board dump-board">
               <div class="lead-before">
                 <p class="ba-label">Before</p>
@@ -398,12 +405,7 @@
               </div>
               <div class="lead-after">
                 <p class="ba-label">After — Run</p>
-                <div class="boost-row" role="group" aria-label="Cadence mode">
-                  <span class="ba-label" style="margin:0">Cadence</span>
-                  <button type="button" class="toggle on" id="dump-mode-standard" aria-pressed="true">3× / week</button>
-                  <button type="button" class="toggle" id="dump-mode-boost" aria-pressed="false">Boost performance</button>
-                </div>
-                <button type="button" class="btn btn-amber" id="dump-run">Run photo dump</button>
+                <button type="button" class="btn btn-amber" id="dump-run">Run Gmail photo dump</button>
                 <p class="toast" id="dump-status" hidden role="status"></p>
                 <div class="gmail-mock" id="dump-gmail" hidden>
                   <div class="gmail-bar">
@@ -420,54 +422,59 @@
                   </div>
                 </div>
                 <div class="ai-queue" id="dump-queue" hidden>
-                  <p class="ba-label">AI queue</p>
-                  <p class="queue-line">Turning 4 shots into captions + crops…</p>
+                  <p class="ba-label">Ghostwriter drafts</p>
+                  <p class="queue-line">Turning dump into 3 brand-tone captions + crops…</p>
                 </div>
                 <div class="calendar-chips" id="dump-chips" aria-live="polite"></div>
               </div>
             </div>
-            <p class="faint" style="margin-top:1rem">Also in Social Engine: DM → lead capture when comments and DMs need a CRM row. Badge lane: Social Engine $1,997.</p>
+            <p class="faint" style="margin-top:1rem">Quiet add-on when needed: DM → lead capture. Not one of the three main variants.</p>
           </div>
 
-          <!-- Variant C -->
+          <!-- Variant 3 — Photo/voice note → AI → Gmail → post -->
           <div class="social-variant" id="social-variant-c" data-social-panel="c" role="tabpanel" aria-labelledby="tab-social-c" hidden>
             <div class="voice-head">
-              <h4 class="voice-headline">Speak it. Save it. Share it.</h4>
+              <h4 class="voice-headline">Photo / voice → note → post</h4>
               <span class="pkg-badge pkg-1997">Social Engine $1,997</span>
             </div>
-            <p class="variant-lede">Voice note from the truck → Sheets transcript → AI creates the post → <strong>Gmail delivers</strong> an image attachment + brand-tone ghostwriter script ready to approve/post.</p>
-            <ol class="voice-steps" aria-label="Voice to Gmail pipeline">
+            <p class="variant-lede">Takes an idea; saves like a note. Ghostwriter makes a <strong>polished caption</strong>. Delivery via <strong>Gmail</strong> with ghostwriter script (+ image as relevant). Path A: <strong>photo post ~20 seconds</strong> to all platforms. Path B: <strong>reel gen 2–10 minutes</strong>.</p>
+            <ol class="voice-steps" aria-label="Note to Gmail pipeline">
               <li class="voice-step" data-voice-step="1" aria-current="false">
                 <span class="voice-num">1</span>
                 <div>
-                  <strong>RECORD</strong>
-                  <p>Talk the job on-site — no typing in the attic.</p>
+                  <strong>NOTE</strong>
+                  <p>Photo or voice idea — saved like a note.</p>
                 </div>
               </li>
               <li class="voice-step" data-voice-step="2" aria-current="false">
                 <span class="voice-num">2</span>
                 <div>
-                  <strong>SAVED</strong>
-                  <p>Sheets row + transcript locked to the job.</p>
+                  <strong>AI</strong>
+                  <p>Ghostwriter polishes the caption in your brand tone.</p>
                 </div>
               </li>
               <li class="voice-step" data-voice-step="3" aria-current="false">
                 <span class="voice-num">3</span>
                 <div>
-                  <strong>AI CREATES</strong>
-                  <p>Caption, hashtags, and crop-ready assets.</p>
+                  <strong>GMAIL</strong>
+                  <p>Package: image + ghostwriter script ready to post.</p>
                 </div>
               </li>
               <li class="voice-step" data-voice-step="4" aria-current="false">
                 <span class="voice-num">4</span>
                 <div>
-                  <strong>GMAIL DELIVERS</strong>
-                  <p>Image attachment + ghostwriter script in your brand tone.</p>
+                  <strong>POST</strong>
+                  <p>Photo ~20s · or reel gen 2–10 min.</p>
                 </div>
               </li>
             </ol>
             <div class="voice-controls">
-              <button type="button" class="btn btn-primary" id="voice-run">Run Speak → Gmail</button>
+              <p class="ba-label">Choose path</p>
+              <div class="path-toggles platform-toggles" role="group" aria-label="Post path" id="note-path">
+                <button type="button" class="toggle on" data-path="photo" aria-pressed="true" id="path-photo">Photo post (~20s)</button>
+                <button type="button" class="toggle" data-path="reel" aria-pressed="false" id="path-reel">Reel gen (2–10 min)</button>
+              </div>
+              <button type="button" class="btn btn-primary" id="voice-run">Run note → Gmail</button>
               <p class="toast" id="voice-toast" hidden role="status"></p>
               <div class="voice-preview" id="voice-preview" hidden>
                 <div class="gmail-mock gmail-mock-deliver" id="voice-gmail">
@@ -476,7 +483,7 @@
                     <span class="gmail-dot"></span>
                     <span class="gmail-dot"></span>
                     <strong>Gmail</strong>
-                    <span class="lead-tag">Ready to approve</span>
+                    <span class="lead-tag" id="voice-path-tag">Photo post · ~20s</span>
                   </div>
                   <div class="gmail-row">
                     <span class="gmail-from">Social Engine → you</span>
@@ -484,8 +491,8 @@
                     <div class="gmail-attach-card">
                       <span class="attach-thumb" aria-hidden="true">🖼</span>
                       <div>
-                        <p class="attach-name">job-photo.jpg</p>
-                        <p class="attach-meta">Image attachment · ready to post</p>
+                        <p class="attach-name" id="voice-attach-name">job-photo.jpg</p>
+                        <p class="attach-meta" id="voice-attach-meta">Image attachment · ready to post (~20 seconds)</p>
                       </div>
                     </div>
                     <div class="ghostwriter-block">
@@ -497,6 +504,16 @@
               </div>
             </div>
           </div>
+
+          <!-- Bonus / also available — inside Social Engine section -->
+          <aside class="social-bonus" aria-label="Bonus services">
+            <h4 class="social-bonus-title">Bonus / also available</h4>
+            <ul class="social-bonus-list">
+              <li><strong>1-on-1 social media support — $400+/mo</strong> — ask for a quote</li>
+              <li><strong>Social media engagement email + basic strategy plan — 1–2×/mo</strong></li>
+              <li class="social-bonus-soft">Cody can also help with <strong>websites, ads, and custom projects/apps</strong> — just ask.</li>
+            </ul>
+          </aside>
         </article>
 
         <!-- MODULE 6 — Demo C -->
@@ -702,11 +719,11 @@
             <h3>Social Engine</h3>
             <p class="pkg-price">$1,997</p>
             <ul class="pkg-outcomes">
-              <li>Approve board → IG / FB / Google</li>
-              <li>Gmail photo dump · 3×/week or Boost</li>
-              <li>Voice/AI → Gmail image + brand-tone ghostwriter</li>
+              <li>Set-and-done auto posts · 3–7×/week · ghostwriter · Google Business</li>
+              <li>Gmail photo dump → 3 posts that week · ghostwriter</li>
+              <li>Photo/voice note → Gmail package · ~20s photo or 2–10 min reel</li>
             </ul>
-            <p class="pkg-includes"><strong>Included:</strong> approve→schedule board, Gmail photo-dump cadence (3×/week or Boost), voice→Gmail image + ghostwriter, DM→lead path available, 1–2 week build.</p>
+            <p class="pkg-includes"><strong>Included:</strong> set-and-done cadence (stories/feed/Google Business) with ghostwriter, Gmail photo dump → 3 posts/week with ghostwriter, note→AI→Gmail post pack (photo ~20s or reel 2–10 min), 1–2 week build.</p>
             <p class="pkg-ttl"><strong>Time to live:</strong> 1–2 week build</p>
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
             <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Social%20Engine%20%241%2C997">Ask about Social Engine</a>
@@ -821,7 +838,7 @@
           </details>
           <details>
             <summary>Is Social Engine in the $497?</summary>
-            <p>No. Intensive covers missed-call recovery and follow-up. Social Engine ($1,997) is a separate custom board — approve → multi-platform. Ask if you want both.</p>
+            <p>No. Intensive covers missed-call recovery and follow-up. Social Engine ($1,997) is separate — set-and-done auto posts, Gmail photo dump, and note→post with ghostwriters. Ask if you want both.</p>
           </details>
           <details>
             <summary>Is NovaBloomChat part of Install Intensive or Team Agents?</summary>

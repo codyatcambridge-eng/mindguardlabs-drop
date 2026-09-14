@@ -150,27 +150,52 @@
     });
   }
 
-  qsa(".platform-toggles .toggle").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const on = btn.classList.toggle("on");
-      btn.setAttribute("aria-pressed", String(on));
+  /* Shared exclusive / multi toggles inside Social Engine */
+  function wireExclusiveToggles(root, selector) {
+    const group = root ? root.querySelector(selector) : null;
+    if (!group) return;
+    qsa(".toggle", group).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        qsa(".toggle", group).forEach((b) => {
+          const on = b === btn;
+          b.classList.toggle("on", on);
+          b.setAttribute("aria-pressed", String(on));
+        });
+      });
     });
-  });
+  }
 
-  const socialApprove = document.getElementById("social-approve");
+  function wireMultiToggles(root, selector) {
+    const group = root ? root.querySelector(selector) : null;
+    if (!group) return;
+    qsa(".toggle", group).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const on = btn.classList.toggle("on");
+        btn.setAttribute("aria-pressed", String(on));
+      });
+    });
+  }
+
+  const variantA = document.getElementById("social-variant-a");
+  wireExclusiveToggles(variantA, "#set-cadence");
+  wireMultiToggles(variantA, "#set-destinations");
+  wireExclusiveToggles(document.getElementById("social-variant-c"), "#note-path");
+
+  /* Variant 1 — Set-and-done auto posts */
+  const socialSetDone = document.getElementById("social-set-done");
   const socialToast = document.getElementById("social-toast");
   const calendarChips = document.getElementById("calendar-chips");
+  const setDoneStatus = document.getElementById("set-done-status");
 
-  if (socialApprove && calendarChips) {
-    socialApprove.addEventListener("click", async () => {
-      const board = document.getElementById("social-variant-a");
-      const active = qsa(".platform-toggles .toggle.on", board || document).map(
-        (t) => t.dataset.platform
-      );
-      if (active.length === 0) {
+  if (socialSetDone && calendarChips) {
+    socialSetDone.addEventListener("click", async () => {
+      const cadenceBtn = document.querySelector("#set-cadence .toggle.on");
+      const cadence = cadenceBtn ? Number(cadenceBtn.dataset.cadence) : 5;
+      const dests = qsa("#set-destinations .toggle.on").map((t) => t.dataset.dest);
+      if (dests.length === 0) {
         if (socialToast) {
           socialToast.hidden = false;
-          socialToast.textContent = "Pick at least one platform.";
+          socialToast.textContent = "Pick at least one destination.";
           socialToast.style.color = "var(--danger)";
           socialToast.style.borderColor = "rgba(240,113,120,0.35)";
           socialToast.style.background = "rgba(240,113,120,0.12)";
@@ -178,56 +203,50 @@
         return;
       }
 
-      socialApprove.disabled = true;
+      socialSetDone.disabled = true;
       calendarChips.innerHTML = "";
       if (socialToast) {
         socialToast.hidden = false;
         socialToast.style.color = "";
         socialToast.style.borderColor = "";
         socialToast.style.background = "";
-        socialToast.textContent = "Scheduling…";
+        socialToast.textContent = "Ghostwriter locking cadence…";
       }
 
-      await delay(500);
-      const labels = { ig: "IG · Wed 10am", fb: "FB · Wed 10am", google: "Google · Wed 11am" };
-      for (const p of active) {
-        await delay(350);
+      await delay(450);
+      const destLabels = {
+        feed: "Feed",
+        stories: "Stories",
+        google: "Google Business",
+      };
+      const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+      const slots = days.slice(0, cadence);
+      for (let i = 0; i < slots.length; i++) {
+        await delay(220);
+        const dest = destLabels[dests[i % dests.length]] || dests[i % dests.length];
         const chip = document.createElement("span");
         chip.className = "cal-chip";
-        chip.textContent = labels[p] || p;
+        chip.textContent = slots[i] + " · " + dest + " · " + cadence + "×/wk";
         calendarChips.appendChild(chip);
       }
 
+      if (setDoneStatus) {
+        setDoneStatus.innerHTML =
+          "Status: <strong>set &amp; done</strong> · " +
+          cadence +
+          "×/week · ghostwriter on · " +
+          dests.map((d) => destLabels[d] || d).join(" / ");
+      }
       if (socialToast) {
         socialToast.textContent =
-          "Approved → " + active.length + " platform" + (active.length > 1 ? "s" : "") + " scheduled.";
+          "Set & done — auto-posting " + cadence + "× per week to " + dests.length + " destination" + (dests.length > 1 ? "s" : "") + ".";
       }
-      socialApprove.disabled = false;
+      socialSetDone.disabled = false;
     });
   }
 
-  /* Variant B — Gmail photo dump cadence */
+  /* Variant 2 — Gmail photo dump → 3 posts that week */
   const dumpRun = document.getElementById("dump-run");
-  const dumpModeStandard = document.getElementById("dump-mode-standard");
-  const dumpModeBoost = document.getElementById("dump-mode-boost");
-
-  function setDumpMode(boost) {
-    if (dumpModeStandard) {
-      dumpModeStandard.classList.toggle("on", !boost);
-      dumpModeStandard.setAttribute("aria-pressed", String(!boost));
-    }
-    if (dumpModeBoost) {
-      dumpModeBoost.classList.toggle("on", boost);
-      dumpModeBoost.setAttribute("aria-pressed", String(boost));
-    }
-  }
-
-  if (dumpModeStandard) {
-    dumpModeStandard.addEventListener("click", () => setDumpMode(false));
-  }
-  if (dumpModeBoost) {
-    dumpModeBoost.addEventListener("click", () => setDumpMode(true));
-  }
 
   if (dumpRun) {
     dumpRun.addEventListener("click", async () => {
@@ -236,24 +255,25 @@
       const queue = document.getElementById("dump-queue");
       const chips = document.getElementById("dump-chips");
       const status = document.getElementById("dump-status");
-      const boost = dumpModeBoost && dumpModeBoost.classList.contains("on");
       if (gmail) gmail.hidden = true;
       if (queue) queue.hidden = true;
       if (chips) chips.innerHTML = "";
       if (status) {
         status.hidden = false;
-        status.textContent = "Routing camera roll → Gmail…";
+        status.textContent = "Routing camera roll → Gmail photo dump…";
       }
       await delay(450);
       if (gmail) gmail.hidden = false;
-      if (status) status.textContent = "Photo dump · 4 job shots landed in Gmail.";
+      if (status) status.textContent = "Gmail photo dump · 4 job shots landed.";
       await delay(500);
       if (queue) queue.hidden = false;
-      if (status) status.textContent = "AI queue building posts…";
+      if (status) status.textContent = "Ghostwriter drafting 3 posts for the week…";
       await delay(450);
-      const schedule = boost
-        ? ["Mon 9am · Boost", "Tue 9am · Boost", "Wed 12pm · Boost", "Thu 9am · Boost", "Fri 4pm · Boost"]
-        : ["Mon 9am · 3×/week", "Wed 12pm · 3×/week", "Fri 4pm · 3×/week"];
+      const schedule = [
+        "Mon 9am · Post 1 · ghostwriter",
+        "Wed 12pm · Post 2 · ghostwriter",
+        "Fri 4pm · Post 3 · ghostwriter",
+      ];
       if (chips) {
         for (const label of schedule) {
           await delay(280);
@@ -264,15 +284,13 @@
         }
       }
       if (status) {
-        status.textContent = boost
-          ? "Boost performance on — higher cadence scheduled."
-          : "Scheduled 3× per week from Gmail photo dump.";
+        status.textContent = "3 scheduled posts that week from Gmail photo dump · ghostwriter on.";
       }
       dumpRun.disabled = false;
     });
   }
 
-  /* Variant C — Voice → Sheets → AI → Gmail ghostwriter */
+  /* Variant 3 — Photo/voice note → AI → Gmail → post */
   const voiceRun = document.getElementById("voice-run");
   const voiceSteps = qsa("[data-voice-step]");
 
@@ -285,29 +303,53 @@
     });
   }
 
+  function currentNotePath() {
+    const on = document.querySelector("#note-path .toggle.on");
+    return on && on.dataset.path === "reel" ? "reel" : "photo";
+  }
+
   if (voiceRun) {
     voiceRun.addEventListener("click", async () => {
       voiceRun.disabled = true;
       const toast = document.getElementById("voice-toast");
       const preview = document.getElementById("voice-preview");
+      const pathTag = document.getElementById("voice-path-tag");
+      const attachName = document.getElementById("voice-attach-name");
+      const attachMeta = document.getElementById("voice-attach-meta");
+      const path = currentNotePath();
       if (toast) {
         toast.hidden = false;
-        toast.textContent = "Recording field note…";
+        toast.textContent = "Saving photo/voice note…";
       }
       if (preview) preview.hidden = true;
       setVoiceStep(1);
       await delay(550);
       setVoiceStep(2);
-      if (toast) toast.textContent = "Saved to Sheets · transcribed.";
+      if (toast) toast.textContent = "Ghostwriter polishing caption…";
       await delay(550);
       setVoiceStep(3);
-      if (toast) toast.textContent = "AI creating image + ghostwriter script…";
+      if (toast) toast.textContent = "Packaging Gmail delivery…";
       await delay(550);
       setVoiceStep(4);
+      if (pathTag) {
+        pathTag.textContent =
+          path === "reel" ? "Reel gen · 2–10 min" : "Photo post · ~20s";
+      }
+      if (attachName) {
+        attachName.textContent = path === "reel" ? "job-reel.mp4" : "job-photo.jpg";
+      }
+      if (attachMeta) {
+        attachMeta.textContent =
+          path === "reel"
+            ? "Reel package · ghostwriter script · 2–10 minutes"
+            : "Image attachment · ready to post (~20 seconds)";
+      }
       if (preview) preview.hidden = false;
       if (toast) {
         toast.textContent =
-          "Gmail delivered — image attachment + brand-tone ghostwriter ready to approve/post.";
+          path === "reel"
+            ? "Gmail delivered — image + ghostwriter script · reel gen path (2–10 min)."
+            : "Gmail delivered — image + ghostwriter script · photo post (~20 seconds).";
       }
       voiceRun.disabled = false;
     });
