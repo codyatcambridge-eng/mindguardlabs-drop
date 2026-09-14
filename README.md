@@ -1,46 +1,34 @@
-# MindGuardLabs — Contractor Drop Page
+# MindGuardLabs — Contractor Drop Page (v2 UX)
 
 Static, Vercel-ready drop page for **MindGuardLabs** (Good Ground LLC). Primary audience: contractors and local home-service owners.
+
+> **v2 (2026-09-14):** Museum-grade redesign — 3 featured interactive demos (phone SMS, Social Engine approve→calendar, Grok+Hermes kanban), fixed CTAs (mailto until Stripe/calendar), mobile hamburger + sticky CTA, compact proof chips. See ops audit: `Hermes-Drop/ops/MONEY-SPRINT-DROP-PAGE-AUDIT.md`.
 
 ## Local preview
 
 ```bash
-# from repo root
 python3 -m http.server 8080
 # open http://localhost:8080
 ```
-
-Or open `index.html` directly in a browser.
 
 ## Deploy (Vercel)
 
 ```bash
 npx vercel --yes
-# production:
 npx vercel --prod --yes
 ```
 
-Or connect the GitHub repo at [vercel.com/new](https://vercel.com/new) and import `codyatcambridge-eng/mindguardlabs-drop`.
+Project: `mindguardlabs-drop` → https://mindguardlabs-drop.vercel.app
 
-This is a static site (`index.html` + `styles.css` + `app.js`). No build step required.
+## CTAs — replace before paying traffic
 
-## Placeholders — replace before launch
+All Book links currently use:
 
-| Token | Purpose |
-|---|---|
-| `{{BOOKING_LINK}}` | Fit-call / calendar URL (all Book CTAs) |
-| `{{CONTACT}}` | Email or contact form URL |
-| `{{CLIENT_NAME}}` / `{{TRADE}}` / `{{LOCATION}}` / `{{QUOTE}}` | Real client review cards only |
-| `{{Shop}}` | Demo SMS shop name (optional polish) |
+`mailto:hello@mindguardlabs.com?subject=...`
 
-### Client reviews (integrity)
+HTML comments mark each spot. **Cody:** swap for real Stripe Checkout / calendar URL. Never leave `{{BOOKING_LINK}}` as href.
 
-- Section **B** under “What owners report” uses empty cards with `data-placeholder="true"`.
-- **Do not invent** MindGuardLabs customers, cities, star ratings, or quotes.
-- When you have a real client note: replace placeholders, remove `data-placeholder="true"` (or hide the helper label), and keep the service line accurate.
-- Industry cards are **cited public sources** — never rebrand them as MindGuardLabs clients.
-
-## Pricing (locked on this page)
+## Pricing (locked)
 
 | Package | Price |
 |---|---|
@@ -50,36 +38,24 @@ This is a static site (`index.html` + `styles.css` + `app.js`). No build step re
 | Growth Care | **$497/mo** |
 | Bundle (Social + Team) | **$4,997** |
 
-Do **not** put $20 / $250 sprint prices on this page.
+Do **not** put $20 / $250 sprint prices on this page. No invented testimonials.
 
-## Demos A–H
+## Featured demos (v2)
 
-Interactive before/after mocks (no live Make/Meta/Twilio/Stripe keys):
+1. **Missed-call text-back** — iPhone UI: Run → miss → SMS thread → estimate chip → maps $497  
+2. **Social Engine** — toggles IG/FB/Google + Approve → calendar chips → $1,997  
+3. **Team Agents** — Grok desk chips + Hermes kanban with animated handoff → $3,497  
 
-- A Missed-call text-back → $497
-- B Speed-to-lead → $497
-- C Estimate follow-up → $497
-- D Social Engine board → $1,997
-- E Social DM → lead card → $1,997
-- F Post-job review ask → $497
-- G Grok Bot team desk → $3,497 (FEATURED)
-- H Hermes Agent kanban → $3,497 (FEATURED)
-
-## Loom shot list
-
-See [`docs/LOOM-SHOT-LIST.md`](docs/LOOM-SHOT-LIST.md) — eight 20–40s walkthroughs to film later and swap for mocks.
+Also-available (pills only): estimate follow-up, reminders, review ask, speed-to-lead, field report.
 
 ## Hard stops
 
 - No secrets in repo or chat
-- No auto-send outreach
 - No invented MindGuardLabs testimonials
-- Bloom Guard untouched
 - Prefer PR to `main`; do not force-push `main`
 
 ## Files
 
-- `index.html` — full page
-- `styles.css` — mobile-first dark slate + teal/amber
-- `app.js` — before/after toggles + Run after animations
-- `docs/LOOM-SHOT-LIST.md` — filming checklist
+- `index.html` · `styles.css` · `app.js`
+- `docs/LOOM-SHOT-LIST.md` — filming checklist (legacy A–H shot list still useful)
+- `vercel.json` — static headers
