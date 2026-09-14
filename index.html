@@ -334,38 +334,144 @@
           </div>
         </article>
 
-        <!-- MODULE 5 — Demo B -->
+        <!-- MODULE 5 — Demo B: Social Engine 3 variants -->
         <article class="feature-demo" id="demo-social">
           <div class="feature-head">
             <div>
               <p class="eyebrow">Maps → Social Engine · System steps 6–7 · not inside Intensive by default</p>
-              <h3>Social Engine board</h3>
-              <p>Homeowners look you up on IG and Google after a quote. Empty grid = distrust. Approve once → multi-platform.</p>
+              <h3>Social Engine — three ways it pays</h3>
+              <p>Homeowners look you up after a quote. Empty grid = distrust. Pick a lane: approve once, turn DMs into leads, or speak a job into a post.</p>
             </div>
             <span class="price-pill">$1,997</span>
           </div>
-          <div class="social-board" id="social-board">
-            <div class="social-draft">
-              <div class="job-photo" aria-hidden="true">
-                <span>Job photo</span>
-                <span class="job-photo-sub">AC install · Newnan</span>
+
+          <div class="social-switcher" role="tablist" aria-label="Social Engine variants" id="social-variant-tabs">
+            <button type="button" class="social-tab active" role="tab" id="tab-social-a" data-social-tab="a" aria-selected="true" aria-controls="social-variant-a" tabindex="0">A · Approve → post</button>
+            <button type="button" class="social-tab" role="tab" id="tab-social-b" data-social-tab="b" aria-selected="false" aria-controls="social-variant-b" tabindex="-1">B · DM → lead</button>
+            <button type="button" class="social-tab" role="tab" id="tab-social-c" data-social-tab="c" aria-selected="false" aria-controls="social-variant-c" tabindex="-1">C · Speak → share</button>
+          </div>
+
+          <!-- Variant A -->
+          <div class="social-variant active" id="social-variant-a" data-social-panel="a" role="tabpanel" aria-labelledby="tab-social-a">
+            <p class="variant-lede"><strong>Approve → multi-platform board.</strong> Job photo + caption → IG / FB / Google in one tap.</p>
+            <div class="social-board" id="social-board">
+              <div class="social-draft">
+                <div class="job-photo" aria-hidden="true">
+                  <span>Job photo</span>
+                  <span class="job-photo-sub">AC install · Newnan</span>
+                </div>
+                <label class="caption-label" for="social-caption">Caption draft</label>
+                <textarea id="social-caption" rows="3" readonly>Just wrapped a full system swap in Coweta County. Clean attic work, same-day cool. Grateful for the trust — call or text when you’re ready.</textarea>
               </div>
-              <label class="caption-label" for="social-caption">Caption draft</label>
-              <textarea id="social-caption" rows="3" readonly>Just wrapped a full system swap in Coweta County. Clean attic work, same-day cool. Grateful for the trust — call or text when you’re ready.</textarea>
+              <div class="social-controls">
+                <p class="ba-label">Post to</p>
+                <div class="platform-toggles" role="group" aria-label="Platforms">
+                  <button type="button" class="toggle on" data-platform="ig" aria-pressed="true">IG</button>
+                  <button type="button" class="toggle on" data-platform="fb" aria-pressed="true">FB</button>
+                  <button type="button" class="toggle" data-platform="google" aria-pressed="false">Google</button>
+                </div>
+                <button type="button" class="btn btn-primary" id="social-approve">Approve &amp; Schedule</button>
+                <p class="toast" id="social-toast" hidden role="status"></p>
+                <div class="calendar-chips" id="calendar-chips" aria-live="polite"></div>
+                <p class="faint">Custom system · Social Engine $1,997 — not bundled in Intensive by default.</p>
+                <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
+                <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Social%20Engine%20%241%2C997">Ask about Social Engine</a>
+              </div>
             </div>
-            <div class="social-controls">
-              <p class="ba-label">Post to</p>
-              <div class="platform-toggles" role="group" aria-label="Platforms">
-                <button type="button" class="toggle on" data-platform="ig" aria-pressed="true">IG</button>
-                <button type="button" class="toggle on" data-platform="fb" aria-pressed="true">FB</button>
-                <button type="button" class="toggle" data-platform="google" aria-pressed="false">Google</button>
+          </div>
+
+          <!-- Variant B -->
+          <div class="social-variant" id="social-variant-b" data-social-panel="b" role="tabpanel" aria-labelledby="tab-social-b" hidden>
+            <p class="variant-lede"><strong>DM / comment → lead card.</strong> Buried “how much?” messages become a CRM row + book chip.</p>
+            <div class="lead-board">
+              <div class="lead-before">
+                <p class="ba-label">Before</p>
+                <div class="dm-thread" aria-label="Buried DM example">
+                  <div class="dm-bubble them">Hey — saw your post. How much for a deck?</div>
+                  <div class="dm-bubble them faint-bubble">…still waiting 3 days later</div>
+                  <p class="dm-meta">Buried in Instagram DMs · easy to miss on a busy day</p>
+                </div>
               </div>
-              <button type="button" class="btn btn-primary" id="social-approve">Approve &amp; Schedule</button>
-              <p class="toast" id="social-toast" hidden role="status"></p>
-              <div class="calendar-chips" id="calendar-chips" aria-live="polite"></div>
-              <p class="faint">Custom system · $1,997 — not bundled in Intensive by default.</p>
-              <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-              <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Social%20Engine%20%241%2C997">Ask about Social Engine</a>
+              <div class="lead-after">
+                <p class="ba-label">After — Run</p>
+                <button type="button" class="btn btn-amber" id="lead-run">Run lead capture</button>
+                <p class="toast" id="lead-status" hidden role="status"></p>
+                <div class="dm-ack" id="lead-ack" hidden>
+                  <p class="ba-label">Auto-ack sent</p>
+                  <div class="dm-bubble shop">Thanks — got your deck question. Sending a quick form so we can quote accurately. Prefer a call or text?</div>
+                </div>
+                <div class="lead-card" id="lead-card" hidden>
+                  <div class="lead-card-head">
+                    <span class="pkg-badge pkg-1997">Social Engine $1,997</span>
+                    <span class="lead-tag">CRM / Sheet</span>
+                  </div>
+                  <dl class="lead-dl">
+                    <div><dt>Lead</dt><dd>Jordan M. · IG DM</dd></div>
+                    <div><dt>Ask</dt><dd>Deck quote — size TBD</dd></div>
+                    <div><dt>Source</dt><dd>Social Engine capture</dd></div>
+                    <div><dt>Next</dt><dd>Qualify → estimate window</dd></div>
+                  </dl>
+                </div>
+                <div class="lead-book" id="lead-book" hidden>
+                  <span class="cal-chip">Book chip · Thu 2–4pm estimate</span>
+                </div>
+              </div>
+            </div>
+            <p class="faint" style="margin-top:1rem">Badge lane: Social Engine $1,997 — same board family as Approve → post.</p>
+          </div>
+
+          <!-- Variant C -->
+          <div class="social-variant" id="social-variant-c" data-social-panel="c" role="tabpanel" aria-labelledby="tab-social-c" hidden>
+            <div class="voice-head">
+              <h4 class="voice-headline">Speak it. Save it. Share it.</h4>
+              <span class="pkg-badge pkg-1997">Social Engine $1,997</span>
+            </div>
+            <p class="variant-lede">Voice note from the truck → Sheets transcript → AI caption → post &amp; grow.</p>
+            <ol class="voice-steps" aria-label="Voice to post pipeline">
+              <li class="voice-step" data-voice-step="1" aria-current="false">
+                <span class="voice-num">1</span>
+                <div>
+                  <strong>RECORD</strong>
+                  <p>Talk the job on-site — no typing in the attic.</p>
+                </div>
+              </li>
+              <li class="voice-step" data-voice-step="2" aria-current="false">
+                <span class="voice-num">2</span>
+                <div>
+                  <strong>SAVED</strong>
+                  <p>Sheets row + transcript locked to the job.</p>
+                </div>
+              </li>
+              <li class="voice-step" data-voice-step="3" aria-current="false">
+                <span class="voice-num">3</span>
+                <div>
+                  <strong>AI CREATES</strong>
+                  <p>Caption, hashtags, and crop-ready copy.</p>
+                </div>
+              </li>
+              <li class="voice-step" data-voice-step="4" aria-current="false">
+                <span class="voice-num">4</span>
+                <div>
+                  <strong>POST &amp; GROW</strong>
+                  <p>Push to the platforms that bring the next quote.</p>
+                </div>
+              </li>
+            </ol>
+            <div class="voice-controls">
+              <p class="ba-label">Platforms on post</p>
+              <div class="platform-toggles" id="voice-platforms" role="group" aria-label="Voice post platforms">
+                <button type="button" class="toggle on" data-platform="ig" aria-pressed="true">Instagram</button>
+                <button type="button" class="toggle on" data-platform="li" aria-pressed="true">LinkedIn</button>
+                <button type="button" class="toggle on" data-platform="x" aria-pressed="true">X / Twitter</button>
+                <button type="button" class="toggle" data-platform="fb" aria-pressed="false">Facebook</button>
+              </div>
+              <button type="button" class="btn btn-primary" id="voice-run">Run Speak → Share</button>
+              <p class="toast" id="voice-toast" hidden role="status"></p>
+              <div class="voice-preview" id="voice-preview" hidden>
+                <p class="ba-label">AI draft</p>
+                <p class="voice-caption">“Wrapped a clean swap in Coweta today — homeowner cool before dinner. Field note → sheet → post. That’s the loop.”</p>
+                <div class="calendar-chips" id="voice-chips" aria-live="polite"></div>
+              </div>
             </div>
           </div>
         </article>
@@ -534,11 +640,27 @@
       <div class="wrap">
         <p class="eyebrow">Packages</p>
         <h2>Pick a door. Prove one leak. Then grow.</h2>
-        <p class="graduation">Most shops start with Intensive to prove one leak is plugged — then add Social Engine or Team Agents. NovaBloomChat ($39) is a separate Mac product — not a substitute for these installs.</p>
+        <p class="graduation">Install Intensive is the on-ramp — prove one leak is plugged. The <strong>$4,997 Social + Team bundle</strong> is the smart full buy when you already know you need both engines. NovaBloomChat ($39) is a separate Mac product — not a substitute for these installs.</p>
+
+        <aside class="bundle-banner" aria-label="Featured bundle">
+          <div class="bundle-banner-copy">
+            <p class="bundle-kicker">Smart full buy · featured</p>
+            <h3>Bundle — Social Engine + Team Agent Stack</h3>
+            <p class="pkg-price">$4,997 <span class="save-pill">Save $497 vs $5,494</span></p>
+            <p class="bundle-math">Social ($1,997) + Team ($3,497) = <s>$5,494</s> → bundle <strong>$4,997</strong>.</p>
+            <p class="market-note">Market note: shops elsewhere often pay <strong>$3,000–$15,000+</strong> for a <em>single</em> automation like one of these. This bundle is cost-efficient — you won’t get another deal like this stacking both engines.</p>
+            <p class="bundle-path">Intensive ($497) stays the proof on-ramp. When you’re ready for the full stack, the bundle is the clear buy — not a weak secondary path.</p>
+          </div>
+          <div class="bundle-banner-cta">
+            <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
+            <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Bundle%20%244%2C997">Ask about Bundle — $4,997</a>
+            <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Book%20Install%20Intensive%20%24497">Or start Intensive — $497</a>
+          </div>
+        </aside>
 
         <div class="pkg-grid">
-          <article class="pkg-card featured">
-            <p class="pkg-who">For shops bleeding jobs on missed calls</p>
+          <article class="pkg-card">
+            <p class="pkg-who">On-ramp · prove the leak</p>
             <h3>Install Intensive</h3>
             <p class="pkg-price">$497</p>
             <ul class="pkg-outcomes">
@@ -558,10 +680,10 @@
             <p class="pkg-price">$1,997</p>
             <ul class="pkg-outcomes">
               <li>Approve once → IG / FB / Google</li>
-              <li>Calendar chips keep the grid alive</li>
-              <li>Fewer “who are you?” losses after estimates</li>
+              <li>DM / comment → lead card</li>
+              <li>Speak it → Sheets → AI → post</li>
             </ul>
-            <p class="pkg-includes"><strong>Included:</strong> custom approve→schedule board, platform toggles, caption pipeline, 1–2 week build.</p>
+            <p class="pkg-includes"><strong>Included:</strong> approve→schedule board, lead capture path, voice→post pipeline, 1–2 week build.</p>
             <p class="pkg-ttl"><strong>Time to live:</strong> 1–2 week build</p>
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
             <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Social%20Engine%20%241%2C997">Ask about Social Engine</a>
@@ -591,12 +713,12 @@
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
             <a class="btn btn-ghost btn-sm" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Growth%20Care%20%24497%2Fmo">Ask about Care</a>
           </article>
-          <article class="pkg-card compact">
+          <article class="pkg-card compact featured-bundle-mini">
             <h3>Bundle — Social + Team</h3>
             <p class="pkg-price">$4,997</p>
-            <p>When you’re ready for both engines in one build. Secondary path — start with Intensive if you’re proving the leak first.</p>
+            <p>Same featured buy as the banner — $497 under à-la-carte ($5,494). Intensive remains the on-ramp; this is the full-stack deal.</p>
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-            <a class="btn btn-ghost btn-sm" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Bundle%20%244%2C997">Ask about Bundle</a>
+            <a class="btn btn-primary btn-sm" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Bundle%20%244%2C997">Ask about Bundle</a>
           </article>
         </div>
       </div>
