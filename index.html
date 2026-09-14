@@ -340,15 +340,15 @@
             <div>
               <p class="eyebrow">Maps → Social Engine · System steps 6–7 · not inside Intensive by default</p>
               <h3>Social Engine — three ways it pays</h3>
-              <p>Homeowners look you up after a quote. Empty grid = distrust. Pick a lane: approve once, turn DMs into leads, or speak a job into a post.</p>
+              <p>Homeowners look you up after a quote. Empty grid = distrust. Pick a lane: approve once, dump job photos into Gmail for a 3×/week cadence (or Boost), or speak a job into a Gmail-ready image + brand-tone ghostwriter.</p>
             </div>
             <span class="price-pill">$1,997</span>
           </div>
 
           <div class="social-switcher" role="tablist" aria-label="Social Engine variants" id="social-variant-tabs">
             <button type="button" class="social-tab active" role="tab" id="tab-social-a" data-social-tab="a" aria-selected="true" aria-controls="social-variant-a" tabindex="0">A · Approve → post</button>
-            <button type="button" class="social-tab" role="tab" id="tab-social-b" data-social-tab="b" aria-selected="false" aria-controls="social-variant-b" tabindex="-1">B · DM → lead</button>
-            <button type="button" class="social-tab" role="tab" id="tab-social-c" data-social-tab="c" aria-selected="false" aria-controls="social-variant-c" tabindex="-1">C · Speak → share</button>
+            <button type="button" class="social-tab" role="tab" id="tab-social-b" data-social-tab="b" aria-selected="false" aria-controls="social-variant-b" tabindex="-1">B · Gmail photo dump</button>
+            <button type="button" class="social-tab" role="tab" id="tab-social-c" data-social-tab="c" aria-selected="false" aria-controls="social-variant-c" tabindex="-1">C · Gmail ghostwriter</button>
           </div>
 
           <!-- Variant A -->
@@ -382,42 +382,51 @@
 
           <!-- Variant B -->
           <div class="social-variant" id="social-variant-b" data-social-panel="b" role="tabpanel" aria-labelledby="tab-social-b" hidden>
-            <p class="variant-lede"><strong>DM / comment → lead card.</strong> Buried “how much?” messages become a CRM row + book chip.</p>
-            <div class="lead-board">
+            <p class="variant-lede"><strong>Gmail photo dump → posts on cadence.</strong> Owner dumps job photos into Gmail → AI turns them into posts → schedules <strong>3× per week</strong>, or toggle <strong>Boost performance</strong> for higher cadence.</p>
+            <div class="lead-board dump-board">
               <div class="lead-before">
                 <p class="ba-label">Before</p>
-                <div class="dm-thread" aria-label="Buried DM example">
-                  <div class="dm-bubble them">Hey — saw your post. How much for a deck?</div>
-                  <div class="dm-bubble them faint-bubble">…still waiting 3 days later</div>
-                  <p class="dm-meta">Buried in Instagram DMs · easy to miss on a busy day</p>
+                <div class="camera-roll" aria-label="Unused camera roll">
+                  <div class="roll-grid" aria-hidden="true">
+                    <span class="roll-thumb">AC swap</span>
+                    <span class="roll-thumb">Attic run</span>
+                    <span class="roll-thumb">Condenser</span>
+                    <span class="roll-thumb">Before/after</span>
+                  </div>
+                  <p class="dm-meta">Camera roll full of job shots · sitting unused · never becoming posts</p>
                 </div>
               </div>
               <div class="lead-after">
                 <p class="ba-label">After — Run</p>
-                <button type="button" class="btn btn-amber" id="lead-run">Run lead capture</button>
-                <p class="toast" id="lead-status" hidden role="status"></p>
-                <div class="dm-ack" id="lead-ack" hidden>
-                  <p class="ba-label">Auto-ack sent</p>
-                  <div class="dm-bubble shop">Thanks — got your deck question. Sending a quick form so we can quote accurately. Prefer a call or text?</div>
+                <div class="boost-row" role="group" aria-label="Cadence mode">
+                  <span class="ba-label" style="margin:0">Cadence</span>
+                  <button type="button" class="toggle on" id="dump-mode-standard" aria-pressed="true">3× / week</button>
+                  <button type="button" class="toggle" id="dump-mode-boost" aria-pressed="false">Boost performance</button>
                 </div>
-                <div class="lead-card" id="lead-card" hidden>
-                  <div class="lead-card-head">
+                <button type="button" class="btn btn-amber" id="dump-run">Run photo dump</button>
+                <p class="toast" id="dump-status" hidden role="status"></p>
+                <div class="gmail-mock" id="dump-gmail" hidden>
+                  <div class="gmail-bar">
+                    <span class="gmail-dot"></span>
+                    <span class="gmail-dot"></span>
+                    <span class="gmail-dot"></span>
+                    <strong>Gmail</strong>
                     <span class="pkg-badge pkg-1997">Social Engine $1,997</span>
-                    <span class="lead-tag">CRM / Sheet</span>
                   </div>
-                  <dl class="lead-dl">
-                    <div><dt>Lead</dt><dd>Jordan M. · IG DM</dd></div>
-                    <div><dt>Ask</dt><dd>Deck quote — size TBD</dd></div>
-                    <div><dt>Source</dt><dd>Social Engine capture</dd></div>
-                    <div><dt>Next</dt><dd>Qualify → estimate window</dd></div>
-                  </dl>
+                  <div class="gmail-row">
+                    <span class="gmail-from">You → shop@…</span>
+                    <strong>Photo dump · 4 job shots</strong>
+                    <p class="gmail-attach">📎 4 images · AC swap · attic · condenser · before/after</p>
+                  </div>
                 </div>
-                <div class="lead-book" id="lead-book" hidden>
-                  <span class="cal-chip">Book chip · Thu 2–4pm estimate</span>
+                <div class="ai-queue" id="dump-queue" hidden>
+                  <p class="ba-label">AI queue</p>
+                  <p class="queue-line">Turning 4 shots into captions + crops…</p>
                 </div>
+                <div class="calendar-chips" id="dump-chips" aria-live="polite"></div>
               </div>
             </div>
-            <p class="faint" style="margin-top:1rem">Badge lane: Social Engine $1,997 — same board family as Approve → post.</p>
+            <p class="faint" style="margin-top:1rem">Also in Social Engine: DM → lead capture when comments and DMs need a CRM row. Badge lane: Social Engine $1,997.</p>
           </div>
 
           <!-- Variant C -->
@@ -426,8 +435,8 @@
               <h4 class="voice-headline">Speak it. Save it. Share it.</h4>
               <span class="pkg-badge pkg-1997">Social Engine $1,997</span>
             </div>
-            <p class="variant-lede">Voice note from the truck → Sheets transcript → AI caption → post &amp; grow.</p>
-            <ol class="voice-steps" aria-label="Voice to post pipeline">
+            <p class="variant-lede">Voice note from the truck → Sheets transcript → AI creates the post → <strong>Gmail delivers</strong> an image attachment + brand-tone ghostwriter script ready to approve/post.</p>
+            <ol class="voice-steps" aria-label="Voice to Gmail pipeline">
               <li class="voice-step" data-voice-step="1" aria-current="false">
                 <span class="voice-num">1</span>
                 <div>
@@ -446,31 +455,45 @@
                 <span class="voice-num">3</span>
                 <div>
                   <strong>AI CREATES</strong>
-                  <p>Caption, hashtags, and crop-ready copy.</p>
+                  <p>Caption, hashtags, and crop-ready assets.</p>
                 </div>
               </li>
               <li class="voice-step" data-voice-step="4" aria-current="false">
                 <span class="voice-num">4</span>
                 <div>
-                  <strong>POST &amp; GROW</strong>
-                  <p>Push to the platforms that bring the next quote.</p>
+                  <strong>GMAIL DELIVERS</strong>
+                  <p>Image attachment + ghostwriter script in your brand tone.</p>
                 </div>
               </li>
             </ol>
             <div class="voice-controls">
-              <p class="ba-label">Platforms on post</p>
-              <div class="platform-toggles" id="voice-platforms" role="group" aria-label="Voice post platforms">
-                <button type="button" class="toggle on" data-platform="ig" aria-pressed="true">Instagram</button>
-                <button type="button" class="toggle on" data-platform="li" aria-pressed="true">LinkedIn</button>
-                <button type="button" class="toggle on" data-platform="x" aria-pressed="true">X / Twitter</button>
-                <button type="button" class="toggle" data-platform="fb" aria-pressed="false">Facebook</button>
-              </div>
-              <button type="button" class="btn btn-primary" id="voice-run">Run Speak → Share</button>
+              <button type="button" class="btn btn-primary" id="voice-run">Run Speak → Gmail</button>
               <p class="toast" id="voice-toast" hidden role="status"></p>
               <div class="voice-preview" id="voice-preview" hidden>
-                <p class="ba-label">AI draft</p>
-                <p class="voice-caption">“Wrapped a clean swap in Coweta today — homeowner cool before dinner. Field note → sheet → post. That’s the loop.”</p>
-                <div class="calendar-chips" id="voice-chips" aria-live="polite"></div>
+                <div class="gmail-mock gmail-mock-deliver" id="voice-gmail">
+                  <div class="gmail-bar">
+                    <span class="gmail-dot"></span>
+                    <span class="gmail-dot"></span>
+                    <span class="gmail-dot"></span>
+                    <strong>Gmail</strong>
+                    <span class="lead-tag">Ready to approve</span>
+                  </div>
+                  <div class="gmail-row">
+                    <span class="gmail-from">Social Engine → you</span>
+                    <strong>Post pack · Coweta AC swap</strong>
+                    <div class="gmail-attach-card">
+                      <span class="attach-thumb" aria-hidden="true">🖼</span>
+                      <div>
+                        <p class="attach-name">job-photo.jpg</p>
+                        <p class="attach-meta">Image attachment · ready to post</p>
+                      </div>
+                    </div>
+                    <div class="ghostwriter-block">
+                      <p class="ba-label">Ghostwriter script · brand tone</p>
+                      <p class="voice-caption brand-voice">“Wrapped a clean swap in Coweta today — homeowner cool before dinner. Same-day install, tidy attic work, no drama. Grateful for the trust. Call or text when you’re ready.”</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -679,11 +702,11 @@
             <h3>Social Engine</h3>
             <p class="pkg-price">$1,997</p>
             <ul class="pkg-outcomes">
-              <li>Approve once → IG / FB / Google</li>
-              <li>DM / comment → lead card</li>
-              <li>Speak it → Sheets → AI → post</li>
+              <li>Approve board → IG / FB / Google</li>
+              <li>Gmail photo dump · 3×/week or Boost</li>
+              <li>Voice/AI → Gmail image + brand-tone ghostwriter</li>
             </ul>
-            <p class="pkg-includes"><strong>Included:</strong> approve→schedule board, lead capture path, voice→post pipeline, 1–2 week build.</p>
+            <p class="pkg-includes"><strong>Included:</strong> approve→schedule board, Gmail photo-dump cadence (3×/week or Boost), voice→Gmail image + ghostwriter, DM→lead path available, 1–2 week build.</p>
             <p class="pkg-ttl"><strong>Time to live:</strong> 1–2 week build</p>
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
             <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Social%20Engine%20%241%2C997">Ask about Social Engine</a>
