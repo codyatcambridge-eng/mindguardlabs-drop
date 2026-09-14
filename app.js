@@ -242,4 +242,22 @@
       hermesRun.disabled = false;
     });
   }
+
+  /* System step accordion */
+  qsa(".system-step-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const wasOpen = btn.getAttribute("aria-expanded") === "true";
+      qsa(".system-step-toggle").forEach((b) => {
+        b.setAttribute("aria-expanded", "false");
+        const p = document.getElementById(b.getAttribute("aria-controls"));
+        if (p) p.hidden = true;
+      });
+      if (!wasOpen) {
+        btn.setAttribute("aria-expanded", "true");
+        const panel = document.getElementById(btn.getAttribute("aria-controls"));
+        if (panel) panel.hidden = false;
+      }
+    });
+  });
+
 })();
