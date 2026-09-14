@@ -1,233 +1,245 @@
-/* MindGuardLabs drop v2 — product-feeling demos */
+/* MindGuardLabs drop v3 — interactions */
 (function () {
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const wait = (ms) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
+  "use strict";
 
-  function qs(sel, el) { return (el || document).querySelector(sel); }
-  function qsa(sel, el) { return Array.from((el || document).querySelectorAll(sel)); }
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const delay = (ms) =>
+    new Promise((r) => setTimeout(r, reduceMotion ? Math.min(ms, 50) : ms));
 
-  /* —— Nav hamburger —— */
-  const toggle = qs("#nav-toggle");
-  const panel = qs("#nav-panel");
-  if (toggle && panel) {
-    toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      panel.classList.toggle("open", !open);
-      toggle.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+  /* —— Nav —— */
+  const navToggle = document.getElementById("nav-toggle");
+  const navPanel = document.getElementById("nav-panel");
+  if (navToggle && navPanel) {
+    navToggle.addEventListener("click", () => {
+      const open = navPanel.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", String(open));
+      navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
-    qsa("a", panel).forEach((a) => {
+    navPanel.querySelectorAll("a").forEach((a) => {
       a.addEventListener("click", () => {
-        toggle.setAttribute("aria-expanded", "false");
-        panel.classList.remove("open");
-        toggle.setAttribute("aria-label", "Open menu");
+        navPanel.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Open menu");
       });
     });
   }
 
-  /* —— SMS missed-call simulator —— */
-  async function runMissedCall(root) {
-    if (!root || root.dataset.busy === "1") return;
-    root.dataset.busy = "1";
+  /* —— Shared phone SMS runner —— */
+  async function runMissedCallDemo({
+    screen,
+    thread,
+    chip,
+    button,
+  }) {
+    if (!screen || !thread) return;
+    if (button) button.disabled = true;
 
-    const call = qs(".call-screen", root);
-    const miss = qs(".miss-banner", root);
-    const sms = qs(".sms-app", root);
-    const thread = qs(".sms-thread", root);
-    const chip = qs(".estimate-chip", root);
+    const callEl = screen.querySelector(".call-screen");
+    const miss = screen.querySelector(".miss-banner");
+    const sms = screen.querySelector(".sms-app");
 
-    // reset
-    if (call) {
-      call.hidden = false;
-      call.classList.remove("is-leaving");
-    }
+    thread.innerHTML = "";
+    if (chip) chip.hidden = true;
     if (miss) miss.hidden = true;
     if (sms) sms.hidden = true;
-    if (thread) thread.innerHTML = "";
-    if (chip) {
-      chip.hidden = true;
-      chip.classList.remove("show");
-    }
+    if (callEl) callEl.hidden = false;
+    screen.dataset.state = "ringing";
 
-    await wait(500);
-    if (call) call.classList.add("is-leaving");
-    await wait(420);
-    if (call) call.hidden = true;
+    await delay(550);
+    if (callEl) callEl.hidden = true;
     if (miss) {
       miss.hidden = false;
-      miss.style.opacity = reduce ? "1" : "0";
-      if (!reduce) {
-        miss.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, fill: "forwards" });
-      }
+      miss.textContent = "Missed · SMS firing";
     }
-    await wait(700);
+    screen.dataset.state = "missed";
+    await delay(500);
+
     if (miss) miss.hidden = true;
     if (sms) sms.hidden = false;
+    screen.dataset.state = "sms";
 
-    const bubbles = [
-      { who: "us", text: "Hey, it’s Apex HVAC — stuck on a job. Text me what you need and I’ll get you on the board." },
-      { who: "them", text: "AC died. Can someone look tomorrow?" },
-      { who: "us", text: "Got it. I can do an estimate Thu 2pm — want that window?" },
-      { who: "them", text: "Yes please." },
+    const messages = [
+      { who: "shop", text: "Hey — sorry we missed you. Still need help today or this week?" },
+      { who: "home", text: "Yes — AC not cooling. Can someone come Thu?" },
+      { who: "shop", text: "Got it. We can do Thursday 2pm for an estimate. Sound good?" },
+      { who: "home", text: "Perfect — see you then." },
     ];
 
-    for (const b of bubbles) {
-      const el = document.createElement("div");
-      el.className = `bubble ${b.who}`;
-      el.textContent = b.text;
-      thread.appendChild(el);
-      // force reflow then show
-      void el.offsetWidth;
-      el.classList.add("show");
-      await wait(550);
+    for (let i = 0; i < messages.length; i++) {
+      await delay(i === 0 ? 400 : 550);
+      const b = document.createElement("div");
+      b.className = "bubble " + messages[i].who;
+      b.textContent = messages[i].text;
+      thread.appendChild(b);
+      thread.scrollTop = thread.scrollHeight;
     }
 
+    await delay(450);
     if (chip) {
       chip.hidden = false;
-      void chip.offsetWidth;
-      chip.classList.add("show");
+      chip.textContent = "Estimate Thu 2:00 PM ✓";
     }
-
-    root.dataset.busy = "0";
+    screen.dataset.state = "booked";
+    if (button) button.disabled = false;
   }
 
-  qs("#hero-run")?.addEventListener("click", () => {
-    runMissedCall(qs("#hero-screen"));
-  });
-  qs('[data-run="missed"]')?.addEventListener("click", () => {
-    runMissedCall(qs("#demo-phone-screen"));
-  });
+  /* Hero Run */
+  const heroRun = document.getElementById("hero-run");
+  if (heroRun) {
+    heroRun.addEventListener("click", () =>
+      runMissedCallDemo({
+        screen: document.getElementById("hero-screen"),
+        thread: document.getElementById("hero-thread"),
+        chip: document.getElementById("hero-chip"),
+        button: heroRun,
+      })
+    );
+  }
+
+  /* Demo A Run */
+  const demoARun = document.getElementById("demo-a-run");
+  if (demoARun) {
+    demoARun.addEventListener("click", () =>
+      runMissedCallDemo({
+        screen: document.getElementById("demo-a-screen"),
+        thread: document.getElementById("demo-a-thread"),
+        chip: document.getElementById("demo-a-chip"),
+        button: demoARun,
+      })
+    );
+  }
 
   /* —— Social Engine —— */
-  const cal = qs("#cal-chips");
-  const approveBtn = qs("#social-approve");
-
-  function selectedPlatforms() {
-    const map = [
-      { id: "plat-ig", label: "Instagram", when: "Wed 5:30 PM" },
-      { id: "plat-fb", label: "Facebook", when: "Wed 5:30 PM" },
-      { id: "plat-gmb", label: "Google Business", when: "Thu 9:00 AM" },
-    ];
-    return map.filter((p) => qs("#" + p.id)?.checked);
-  }
-
-  approveBtn?.addEventListener("click", async () => {
-    if (!cal) return;
-    const plats = selectedPlatforms();
-    cal.innerHTML = "";
-    if (!plats.length) {
-      cal.innerHTML = '<p class="cal-empty">Turn on at least one platform</p>';
-      return;
-    }
-    for (let i = 0; i < plats.length; i++) {
-      const p = plats[i];
-      const chip = document.createElement("div");
-      chip.className = "cal-chip";
-      chip.style.animationDelay = reduce ? "0ms" : `${i * 140}ms`;
-      chip.innerHTML = `<span>${p.label}</span><span>Scheduled · ${p.when}</span>`;
-      cal.appendChild(chip);
-      await wait(reduce ? 0 : 160);
-    }
-    approveBtn.textContent = "Approved ✓";
-    await wait(1600);
-    approveBtn.textContent = "Approve & schedule";
-  });
-
-  // live toggle: if chips already shown, refresh on change
-  ["plat-ig", "plat-fb", "plat-gmb"].forEach((id) => {
-    qs("#" + id)?.addEventListener("change", () => {
-      if (cal && !qs(".cal-empty", cal) && qsa(".cal-chip", cal).length) {
-        approveBtn?.click();
-      }
+  const toggles = document.querySelectorAll(".platform-toggles .toggle");
+  toggles.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const on = btn.classList.toggle("on");
+      btn.setAttribute("aria-pressed", String(on));
     });
   });
 
+  const socialApprove = document.getElementById("social-approve");
+  const socialToast = document.getElementById("social-toast");
+  const calendarChips = document.getElementById("calendar-chips");
+
+  if (socialApprove && calendarChips) {
+    socialApprove.addEventListener("click", async () => {
+      const active = [...document.querySelectorAll(".platform-toggles .toggle.on")].map(
+        (t) => t.dataset.platform
+      );
+      if (active.length === 0) {
+        if (socialToast) {
+          socialToast.hidden = false;
+          socialToast.textContent = "Pick at least one platform.";
+          socialToast.style.color = "var(--danger)";
+          socialToast.style.borderColor = "rgba(240,113,120,0.35)";
+          socialToast.style.background = "rgba(240,113,120,0.12)";
+        }
+        return;
+      }
+
+      socialApprove.disabled = true;
+      calendarChips.innerHTML = "";
+      if (socialToast) {
+        socialToast.hidden = false;
+        socialToast.style.color = "";
+        socialToast.style.borderColor = "";
+        socialToast.style.background = "";
+        socialToast.textContent = "Scheduling…";
+      }
+
+      await delay(500);
+      const labels = { ig: "IG · Wed 10am", fb: "FB · Wed 10am", google: "Google · Wed 11am" };
+      for (const p of active) {
+        await delay(350);
+        const chip = document.createElement("span");
+        chip.className = "cal-chip";
+        chip.textContent = labels[p] || p;
+        calendarChips.appendChild(chip);
+      }
+
+      if (socialToast) {
+        socialToast.textContent =
+          "Approved → " + active.length + " platform" + (active.length > 1 ? "s" : "") + " scheduled.";
+      }
+      socialApprove.disabled = false;
+    });
+  }
+
   /* —— Grok desk —— */
-  const replies = {
-    leads: {
-      title: "Lead digest",
-      body: "3 new leads today · 1 hot (AC emergency, Coweta) · 2 estimate follow-ups waiting on Day-3 nudge.",
-    },
-    followup: {
-      title: "Draft SMS",
-      body: "“Hi Sam — checking in on the attic quote from Tuesday. Still good for Thu 2pm estimate, or want a different window?”",
-    },
-    crew: {
-      title: "Crew run-of-show",
-      body: "Tomorrow: Unit A — attic AC (Coweta 9am) · Unit B — filter route (Newnan 1pm). Parts staged on truck 2.",
-    },
+  const drafts = {
+    summarize:
+      "Leads this week (3):\n• Thu 2pm estimate — AC not cooling (Newnan)\n• Sat AM — duct inspect (Coweta)\n• Waiting reply — furnace quote sent Day 3\n\nPriority: confirm Thu window; nudge furnace lead.",
+    followup:
+      "Hi — following up on the estimate we sent. Still good for you this week, or want a different window? Reply YES and we’ll lock it. — Shop",
+    crew:
+      "Crew 7am: Newnan AC swap. Bring nitrogen + 3/8 fittings. Customer gate code on Jobber. Text when en route.",
   };
 
-  qsa("[data-chip]").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      qsa("[data-chip]").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const key = btn.getAttribute("data-chip");
-      const out = qs("#grok-out");
-      const data = replies[key];
-      if (!out || !data) return;
-      out.innerHTML = "";
-      await wait(reduce ? 0 : 280);
-      out.innerHTML = `<strong>${data.title}</strong>${data.body}`;
+  const draftPanel = document.getElementById("draft-panel");
+  document.querySelectorAll(".grok-chips .chip").forEach((chip) => {
+    chip.addEventListener("click", async () => {
+      document.querySelectorAll(".grok-chips .chip").forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      if (!draftPanel) return;
+      draftPanel.innerHTML = "<p class=\"draft-placeholder\">Drafting…</p>";
+      await delay(450);
+      const key = chip.dataset.draft;
+      draftPanel.textContent = drafts[key] || "";
     });
   });
 
   /* —— Hermes kanban —— */
-  const lanes = {
-    inbox: qs("#lane-inbox"),
-    specialists: qs("#lane-specialists"),
-    done: qs("#lane-done"),
-  };
+  const hermesRun = document.getElementById("hermes-run");
+  const hermesCard = document.getElementById("hermes-card");
+  const hermesWork = document.getElementById("hermes-work");
+  const hermesDone = document.getElementById("hermes-done");
+  const hermesAudit = document.getElementById("hermes-audit");
 
-  function makeCard(title, meta) {
-    const el = document.createElement("div");
-    el.className = "k-card";
-    el.innerHTML = `${title}<span class="meta">${meta}</span>`;
-    return el;
+  if (hermesRun && hermesCard) {
+    hermesRun.addEventListener("click", async () => {
+      hermesRun.disabled = true;
+      if (hermesWork) hermesWork.innerHTML = "";
+      if (hermesDone) hermesDone.innerHTML = "";
+      if (hermesAudit) hermesAudit.hidden = true;
+
+      hermesCard.textContent = "Orchestrator";
+      hermesCard.dataset.stage = "active";
+      await delay(550);
+
+      hermesCard.textContent = "Handed off";
+      hermesCard.dataset.stage = "idle";
+      if (hermesWork) {
+        const w = document.createElement("div");
+        w.className = "card";
+        w.dataset.stage = "active";
+        w.textContent = "Research";
+        hermesWork.appendChild(w);
+      }
+      await delay(500);
+      if (hermesWork) {
+        hermesWork.querySelector(".card").textContent = "Draft";
+      }
+      await delay(500);
+      if (hermesWork) {
+        hermesWork.querySelector(".card").textContent = "Review";
+      }
+      await delay(500);
+
+      if (hermesWork) hermesWork.innerHTML = "";
+      if (hermesDone) {
+        const d = document.createElement("div");
+        d.className = "card";
+        d.dataset.stage = "done";
+        d.textContent = "Done";
+        hermesDone.appendChild(d);
+      }
+      if (hermesAudit) {
+        hermesAudit.hidden = false;
+        hermesAudit.textContent =
+          "Audit: Orchestrator → Research → Draft → Review → Done. Handoff logged.";
+      }
+      hermesRun.disabled = false;
+    });
   }
-
-  function resetBoard() {
-    if (!lanes.inbox) return;
-    lanes.inbox.innerHTML = "";
-    lanes.specialists.innerHTML = "";
-    lanes.done.innerHTML = "";
-    const c1 = makeCard("Orchestrate: follow-up pack", "owner request");
-    const c2 = makeCard("Photo → caption draft", "social lane");
-    lanes.inbox.appendChild(c1);
-    lanes.inbox.appendChild(c2);
-    return [c1, c2];
-  }
-
-  async function moveCard(card, toLane, audit) {
-    if (!card || !toLane) return;
-    card.classList.add("moving");
-    await wait(420);
-    toLane.appendChild(card);
-    if (audit) {
-      const meta = card.querySelector(".meta");
-      if (meta) meta.textContent = audit;
-    }
-    await wait(200);
-    card.classList.remove("moving");
-  }
-
-  let hermesBusy = false;
-  qs("#hermes-run")?.addEventListener("click", async () => {
-    if (hermesBusy) return;
-    hermesBusy = true;
-    const cards = resetBoard();
-    await wait(500);
-    // handoff 1 → specialists
-    await moveCard(cards[0], lanes.specialists, "→ content specialist");
-    await wait(450);
-    await moveCard(cards[1], lanes.specialists, "→ follow-up specialist");
-    await wait(500);
-    await moveCard(cards[0], lanes.done, "audit: caption approved");
-    await wait(400);
-    await moveCard(cards[1], lanes.done, "audit: SMS queued");
-    hermesBusy = false;
-  });
-
-  // seed empty board state
-  resetBoard();
 })();

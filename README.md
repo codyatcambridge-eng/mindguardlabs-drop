@@ -1,8 +1,8 @@
-# MindGuardLabs — Contractor Drop Page (v2 UX)
+# MindGuardLabs — Contractor Drop Page (v3)
 
-Static, Vercel-ready drop page for **MindGuardLabs** (Good Ground LLC). Primary audience: contractors and local home-service owners.
+Static, Vercel-ready drop page for **MindGuardLabs** (Good Ground LLC). Primary audience: HVAC / home-service owners who need a **job-recovery system**, not demo toys.
 
-> **v2 (2026-09-14):** Museum-grade redesign — 3 featured interactive demos (phone SMS, Social Engine approve→calendar, Grok+Hermes kanban), fixed CTAs (mailto until Stripe/calendar), mobile hamburger + sticky CTA, compact proof chips. See ops audit: `Hermes-Drop/ops/MONEY-SPRINT-DROP-PAGE-AUDIT.md`.
+Live: https://mindguardlabs-drop.vercel.app
 
 ## Local preview
 
@@ -18,15 +18,15 @@ npx vercel --yes
 npx vercel --prod --yes
 ```
 
-Project: `mindguardlabs-drop` → https://mindguardlabs-drop.vercel.app
-
 ## CTAs — replace before paying traffic
 
-All Book links currently use:
+All Book / Ask links currently use:
 
 `mailto:hello@mindguardlabs.com?subject=...`
 
-HTML comments mark each spot. **Cody:** swap for real Stripe Checkout / calendar URL. Never leave `{{BOOKING_LINK}}` as href.
+HTML comments mark each spot (`<!-- Cody: replace mailto with real Stripe/calendar booking URL -->`).
+
+**Swap instructions:** search the repo for `mailto:hello@mindguardlabs.com` and replace each `href` with your Stripe Checkout or calendar URL. Never leave `{{BOOKING_LINK}}` as a raw href.
 
 ## Pricing (locked)
 
@@ -38,24 +38,34 @@ HTML comments mark each spot. **Cody:** swap for real Stripe Checkout / calendar
 | Growth Care | **$497/mo** |
 | Bundle (Social + Team) | **$4,997** |
 
-Do **not** put $20 / $250 sprint prices on this page. No invented testimonials.
+Do **not** put $20 / $39 / $250 as heroes. Soft NovaBloom chip only if space. No invented MindGuardLabs testimonials. Bloom Guard untouched.
 
-## Featured demos (v2)
+## Conversion modules (v3)
 
-1. **Missed-call text-back** — iPhone UI: Run → miss → SMS thread → estimate chip → maps $497  
-2. **Social Engine** — toggles IG/FB/Google + Approve → calendar chips → $1,997  
-3. **Team Agents** — Grok desk chips + Hermes kanban with animated handoff → $3,497  
+0. Global spine: missed call → SMS → estimate → follow-up → job → review → social  
+1. Sticky nav + mobile CTA bar (Book $497)  
+2. Hero + live iPhone mock  
+3. Job-Recovery System 7-step diagram with package badges  
+4. Demo A — missed-call text-back → $497  
+5. Demo B — Social Engine toggles + calendar chips → $1,997  
+6. Demo C — Grok desk + Hermes Run board → $3,497  
+7. Also-in Intensive/Care pills  
+8. Packages + graduation strip  
+9. Industry proof (cited only)  
+10. How it works + ownership  
+11. FAQ  
+12. Final CTA band  
 
-Also-available (pills only): estimate follow-up, reminders, review ask, speed-to-lead, field report.
+See `CHANGELOG.md`.
 
 ## Hard stops
 
-- No secrets in repo or chat
-- No invented MindGuardLabs testimonials
+- No secrets in repo or chat  
+- No fake clients / invented testimonials  
 - Prefer PR to `main`; do not force-push `main`
 
 ## Files
 
-- `index.html` · `styles.css` · `app.js`
-- `docs/LOOM-SHOT-LIST.md` — filming checklist (legacy A–H shot list still useful)
-- `vercel.json` — static headers
+- `index.html` · `styles.css` · `app.js`  
+- `vercel.json` — static headers  
+- `docs/LOOM-SHOT-LIST.md` — filming checklist (legacy)
