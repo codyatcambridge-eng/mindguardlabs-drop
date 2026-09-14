@@ -1,10 +1,11 @@
-/* MindGuardLabs drop v3 — interactions */
+/* MindGuardLabs drop v5 — interactions */
 (function () {
   "use strict";
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const delay = (ms) =>
     new Promise((r) => setTimeout(r, reduceMotion ? Math.min(ms, 50) : ms));
+  const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   /* —— Nav —— */
   const navToggle = document.getElementById("nav-toggle");
@@ -109,9 +110,47 @@
     );
   }
 
-  /* —— Social Engine —— */
-  const toggles = document.querySelectorAll(".platform-toggles .toggle");
-  toggles.forEach((btn) => {
+  /* —— Social Engine (3 variants) —— */
+  const socialTabs = qsa("[data-social-tab]");
+  const socialPanels = qsa("[data-social-panel]");
+
+  function showSocialVariant(id) {
+    socialTabs.forEach((tab) => {
+      const on = tab.dataset.socialTab === id;
+      tab.classList.toggle("active", on);
+      tab.setAttribute("aria-selected", String(on));
+      tab.setAttribute("tabindex", on ? "0" : "-1");
+    });
+    socialPanels.forEach((panel) => {
+      const on = panel.dataset.socialPanel === id;
+      panel.hidden = !on;
+      panel.classList.toggle("active", on);
+    });
+  }
+
+  socialTabs.forEach((tab) => {
+    tab.addEventListener("click", () => showSocialVariant(tab.dataset.socialTab));
+  });
+
+  const socialTablist = document.getElementById("social-variant-tabs");
+  if (socialTablist) {
+    socialTablist.addEventListener("keydown", (e) => {
+      const tabs = socialTabs;
+      const i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      let next = i;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") next = 0;
+      else if (e.key === "End") next = tabs.length - 1;
+      else return;
+      e.preventDefault();
+      tabs[next].focus();
+      showSocialVariant(tabs[next].dataset.socialTab);
+    });
+  }
+
+  qsa(".platform-toggles .toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const on = btn.classList.toggle("on");
       btn.setAttribute("aria-pressed", String(on));
@@ -124,7 +163,8 @@
 
   if (socialApprove && calendarChips) {
     socialApprove.addEventListener("click", async () => {
-      const active = [...document.querySelectorAll(".platform-toggles .toggle.on")].map(
+      const board = document.getElementById("social-variant-a");
+      const active = qsa(".platform-toggles .toggle.on", board || document).map(
         (t) => t.dataset.platform
       );
       if (active.length === 0) {
@@ -163,6 +203,96 @@
           "Approved → " + active.length + " platform" + (active.length > 1 ? "s" : "") + " scheduled.";
       }
       socialApprove.disabled = false;
+    });
+  }
+
+  /* Variant B — DM → lead card */
+  const leadRun = document.getElementById("lead-run");
+  if (leadRun) {
+    leadRun.addEventListener("click", async () => {
+      leadRun.disabled = true;
+      const ack = document.getElementById("lead-ack");
+      const card = document.getElementById("lead-card");
+      const book = document.getElementById("lead-book");
+      const status = document.getElementById("lead-status");
+      if (ack) ack.hidden = true;
+      if (card) card.hidden = true;
+      if (book) book.hidden = true;
+      if (status) {
+        status.hidden = false;
+        status.textContent = "Auto-ack drafting…";
+      }
+      await delay(450);
+      if (ack) ack.hidden = false;
+      if (status) status.textContent = "Logging lead to CRM / sheet…";
+      await delay(500);
+      if (card) card.hidden = false;
+      await delay(350);
+      if (book) book.hidden = false;
+      if (status) status.textContent = "Lead captured · book chip ready.";
+      leadRun.disabled = false;
+    });
+  }
+
+  /* Variant C — Voice → Sheets → AI → Post */
+  const voiceRun = document.getElementById("voice-run");
+  const voiceSteps = qsa("[data-voice-step]");
+  const voicePlatforms = qsa("#voice-platforms .toggle");
+
+  function setVoiceStep(n) {
+    voiceSteps.forEach((el) => {
+      const step = Number(el.dataset.voiceStep);
+      el.classList.toggle("done", step < n);
+      el.classList.toggle("active", step === n);
+      el.setAttribute("aria-current", step === n ? "step" : "false");
+    });
+  }
+
+  if (voiceRun) {
+    voiceRun.addEventListener("click", async () => {
+      voiceRun.disabled = true;
+      const toast = document.getElementById("voice-toast");
+      const preview = document.getElementById("voice-preview");
+      const chips = document.getElementById("voice-chips");
+      if (toast) {
+        toast.hidden = false;
+        toast.textContent = "Recording field note…";
+      }
+      if (preview) preview.hidden = true;
+      if (chips) chips.innerHTML = "";
+      setVoiceStep(1);
+      await delay(550);
+      setVoiceStep(2);
+      if (toast) toast.textContent = "Saved to Sheets · transcribed.";
+      await delay(550);
+      setVoiceStep(3);
+      if (toast) toast.textContent = "AI drafting caption + assets…";
+      await delay(550);
+      setVoiceStep(4);
+      if (preview) preview.hidden = false;
+      const active = voicePlatforms.filter((t) => t.classList.contains("on")).map((t) => t.dataset.platform);
+      const labels = {
+        ig: "IG · Thu 9am",
+        li: "LinkedIn · Thu 10am",
+        x: "X · Thu 10am",
+        fb: "FB · Thu 11am",
+      };
+      if (chips) {
+        for (const p of active) {
+          await delay(280);
+          const chip = document.createElement("span");
+          chip.className = "cal-chip";
+          chip.textContent = labels[p] || p;
+          chips.appendChild(chip);
+        }
+      }
+      if (toast) {
+        toast.textContent =
+          active.length
+            ? "Posted path ready → " + active.length + " platform" + (active.length > 1 ? "s" : "") + "."
+            : "AI draft ready — pick platforms to grow.";
+      }
+      voiceRun.disabled = false;
     });
   }
 
