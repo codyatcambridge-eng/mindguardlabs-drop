@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="MindGuardLabs installs contractor-ready automations — missed-call recovery, Make.com social, and team agents (Grok Bot + Hermes)." />
-  <title>MindGuardLabs — Catch the job while you’re on the job</title>
+  <meta name="description" content="MindGuardLabs installs the job-recovery system for home-service shops — missed-call SMS, social engine, and team agents. Coweta-area / remote." />
+  <title>MindGuardLabs — Job-Recovery System for Home-Service Shops</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
+  <!-- MODULE 1 — Sticky nav -->
   <header class="nav" id="top">
     <div class="wrap nav-inner">
       <a class="brand" href="#top">
@@ -24,380 +25,513 @@
       </button>
       <nav class="nav-panel" id="nav-panel" aria-label="Primary">
         <a href="#demos">Demos</a>
+        <a href="#system">System</a>
         <a href="#packages">Packages</a>
-        <a href="#proof">Proof</a>
-        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
         <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-        <a class="btn btn-primary btn-sm" href="mailto:hello@mindguardlabs.com?subject=Install%20Intensive%20%24497">Book Install — $497</a>
+        <a class="btn btn-primary btn-sm" href="mailto:hello@mindguardlabs.com?subject=Book%20Install%20Intensive%20%24497">Book $497</a>
       </nav>
     </div>
   </header>
 
+  <!-- Sticky mobile CTA bar -->
+  <div class="mobile-cta" id="mobile-cta" role="region" aria-label="Quick actions">
+    <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
+    <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Book%20Install%20Intensive%20%24497">Book $497</a>
+    <a class="btn btn-ghost" href="#packages">See packages</a>
+  </div>
+
   <main id="main">
-    <!-- HERO -->
+    <!-- MODULE 2 — Hero -->
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">MindGuardLabs · Good Ground LLC</p>
-          <h1>Catch the job while you’re still on the job.</h1>
+          <h1>Stop losing jobs to missed calls and dead social.</h1>
           <p class="lead">
-            Contractor-ready automations: missed-call recovery, social that stays alive, and team agents
-            (<strong>Grok Bot</strong> + <strong>Hermes Agent</strong>).
+            MindGuardLabs installs the <strong>job-recovery system</strong> for home-service shops —
+            Coweta-area or remote. Missed call → SMS → estimate → follow-up → review → proof that keeps working.
           </p>
           <div class="btn-row">
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-            <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Install%20Intensive%20%24497">Book Install Intensive — $497</a>
-            <a class="btn btn-ghost" href="#demos">See live demos</a>
+            <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Book%20Install%20Intensive%20%24497">Book Install Intensive — $497</a>
+            <a class="btn btn-ghost" href="#system">See the system</a>
           </div>
-          <p class="hero-meta">Make.com · Grok Bot · Hermes · contractors &amp; home services</p>
+          <ul class="trust-chips" aria-label="Stack">
+            <li>Make.com</li>
+            <li>Missed-call recovery</li>
+            <li>Grok Bot</li>
+            <li>Hermes</li>
+          </ul>
         </div>
 
-        <aside class="hero-demo" aria-label="Interactive missed-call SMS demo">
+        <aside class="hero-demo" aria-label="Live missed-call recovery mock">
           <div class="iphone" id="hero-phone">
-            <div class="iphone-notch" aria-hidden="true"></div>
-            <div class="iphone-status">
-              <span>9:41</span>
-              <span class="iphone-carrier">LTE</span>
-            </div>
-            <div class="iphone-screen" id="hero-screen" data-state="idle">
-              <div class="call-screen" data-phase="idle">
-                <p class="call-label">Incoming</p>
-                <p class="call-name">Homeowner</p>
-                <p class="call-sub">You’re on a ladder</p>
-                <div class="call-actions">
-                  <span class="call-decline">Decline</span>
-                  <span class="call-accept">Accept</span>
-                </div>
-              </div>
-              <div class="miss-banner" hidden>Missed call · voicemail left</div>
-              <div class="sms-app" hidden>
-                <div class="sms-header">Messages · Shop</div>
-                <div class="sms-thread" id="hero-thread"></div>
-                <div class="estimate-chip" id="hero-chip" hidden>Estimate Thu 2:00 PM ✓</div>
-              </div>
-            </div>
-          </div>
-          <div class="demo-controls">
-            <button type="button" class="btn btn-amber" id="hero-run">Run demo</button>
-            <span class="faint">Interactive mock — no live SMS</span>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- FEATURED DEMOS -->
-    <section class="section" id="demos">
-      <div class="wrap">
-        <p class="eyebrow">Featured workflows</p>
-        <h2>Three installs. Play them.</h2>
-        <p class="lead section-lead">Real product mocks — not bullet fades. Tap Run and watch the recovery happen.</p>
-
-        <!-- Demo 1: Missed-call -->
-        <article class="feature-demo" id="demo-missed">
-          <div class="feature-head">
-            <div>
-              <p class="eyebrow">Install Intensive</p>
-              <h3>Missed-call text-back</h3>
-              <p class="feature-outcome">Recover the conversation by text while you’re still on the roof.</p>
-            </div>
-            <span class="price-tag">$497</span>
-          </div>
-          <div class="feature-body feature-phone-row">
-            <div class="iphone iphone-lg" id="demo-phone">
+            <div class="iphone-bezel">
               <div class="iphone-notch" aria-hidden="true"></div>
-              <div class="iphone-status"><span>9:41</span><span>LTE</span></div>
-              <div class="iphone-screen" id="demo-phone-screen" data-state="idle">
+              <div class="iphone-status">
+                <span>9:41</span>
+                <span class="dots" aria-hidden="true">●●●</span>
+              </div>
+              <div class="iphone-screen" id="hero-screen" data-state="idle">
                 <div class="call-screen" data-phase="idle">
                   <p class="call-label">Incoming</p>
                   <p class="call-name">Homeowner</p>
-                  <p class="call-sub">AC / HVAC inquiry</p>
+                  <p class="call-sub">You’re on a roof</p>
                   <div class="call-actions">
                     <span class="call-decline">Decline</span>
                     <span class="call-accept">Accept</span>
                   </div>
                 </div>
-                <div class="miss-banner" hidden>Missed · already dialing the next shop</div>
+                <div class="miss-banner" hidden>Missed · went to voicemail</div>
                 <div class="sms-app" hidden>
-                  <div class="sms-header">Messages</div>
-                  <div class="sms-thread" id="demo-thread"></div>
-                  <div class="estimate-chip" id="demo-chip" hidden>Estimate window: Thu 2pm</div>
+                  <div class="sms-header">Messages · Shop line</div>
+                  <div class="sms-thread" id="hero-thread"></div>
+                  <div class="estimate-chip" id="hero-chip" hidden>Estimate Thu 2:00 PM ✓</div>
+                </div>
+              </div>
+              <div class="iphone-home" aria-hidden="true"></div>
+            </div>
+          </div>
+          <div class="demo-controls">
+            <button type="button" class="btn btn-amber" id="hero-run">Run</button>
+            <span class="faint">Staged mock — no live SMS</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- MODULE 3 — Job-Recovery System -->
+    <section class="section system-section" id="system">
+      <div class="wrap">
+        <p class="eyebrow">The machine</p>
+        <h2>The Job-Recovery System</h2>
+        <p class="lead section-lead">
+          One loop from missed call to Google proof — not eight disconnected toys.
+          See which package covers each link.
+        </p>
+
+        <div class="system-track" role="list" aria-label="Job-recovery steps">
+          <article class="system-step" role="listitem">
+            <span class="step-num">1</span>
+            <h3>Missed call</h3>
+            <p>You’re on a ladder. They hang up.</p>
+            <span class="pkg-badge pkg-497">$497</span>
+          </article>
+          <article class="system-step" role="listitem">
+            <span class="step-num">2</span>
+            <h3>Auto SMS text-back</h3>
+            <p>Shop replies in seconds — no phone pick-up.</p>
+            <span class="pkg-badge pkg-497">$497</span>
+          </article>
+          <article class="system-step" role="listitem">
+            <span class="step-num">3</span>
+            <h3>Qualify / book estimate</h3>
+            <p>Homeowner texts a window. Chip lands on your calendar.</p>
+            <span class="pkg-badge pkg-497">$497</span>
+          </article>
+          <article class="system-step" role="listitem">
+            <span class="step-num">4</span>
+            <h3>Estimate sent</h3>
+            <p>Quote out while you’re still on site or en route.</p>
+            <span class="pkg-badge pkg-497">$497 · $3,497</span>
+          </article>
+          <article class="system-step" role="listitem">
+            <span class="step-num">5</span>
+            <h3>Day 3 / 7 / 14 follow-up</h3>
+            <p>Sequence runs until they reply — then stops.</p>
+            <span class="pkg-badge pkg-497">$497 · Care</span>
+          </article>
+          <article class="system-step" role="listitem">
+            <span class="step-num">6</span>
+            <h3>Job complete</h3>
+            <p>Work done. Proof photo ready for the next ask.</p>
+            <span class="pkg-badge pkg-1997">$1,997 · $3,497</span>
+          </article>
+          <article class="system-step" role="listitem">
+            <span class="step-num">7</span>
+            <h3>Review + social proof</h3>
+            <p>Review ask + post keeps the grid alive for the next stalker.</p>
+            <span class="pkg-badge pkg-1997">$1,997</span>
+          </article>
+        </div>
+        <p class="system-footnote">
+          Install Intensive proves one link. Social Engine + Team Agents run more of the chain.
+        </p>
+      </div>
+    </section>
+
+    <!-- MODULES 4–6 — Deep demos -->
+    <section class="section" id="demos">
+      <div class="wrap">
+        <p class="eyebrow">Deep demos</p>
+        <h2>Three installs you can watch</h2>
+        <p class="lead section-lead">Real product mocks. Tap Run. Map each one to a package.</p>
+
+        <!-- MODULE 4 — Demo A -->
+        <article class="feature-demo" id="demo-missed">
+          <div class="feature-head">
+            <div>
+              <p class="eyebrow">Maps → Install Intensive</p>
+              <h3>Missed-call text-back</h3>
+              <p>You’ve been on a ladder. The call dies. Competitor answers first — unless SMS recovers it in seconds.</p>
+            </div>
+            <span class="price-pill">$497</span>
+          </div>
+          <div class="feature-grid">
+            <div class="before-after">
+              <div class="ba-col">
+                <p class="ba-label">Before</p>
+                <div class="iphone iphone-sm" id="demo-a-before">
+                  <div class="iphone-bezel">
+                    <div class="iphone-notch" aria-hidden="true"></div>
+                    <div class="iphone-status"><span>9:41</span></div>
+                    <div class="iphone-screen before-screen">
+                      <p class="call-label">Ring…</p>
+                      <p class="call-name">Missed</p>
+                      <p class="call-sub">Voicemail · they called the next shop</p>
+                    </div>
+                    <div class="iphone-home" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="ba-col">
+                <p class="ba-label">After — Run</p>
+                <div class="iphone iphone-sm" id="demo-a-phone">
+                  <div class="iphone-bezel">
+                    <div class="iphone-notch" aria-hidden="true"></div>
+                    <div class="iphone-status"><span>9:41</span></div>
+                    <div class="iphone-screen" id="demo-a-screen" data-state="idle">
+                      <div class="call-screen">
+                        <p class="call-label">Incoming</p>
+                        <p class="call-name">Homeowner</p>
+                        <p class="call-sub">On a ladder</p>
+                      </div>
+                      <div class="miss-banner" hidden>Missed · SMS firing</div>
+                      <div class="sms-app" hidden>
+                        <div class="sms-header">Messages · Shop</div>
+                        <div class="sms-thread" id="demo-a-thread"></div>
+                        <div class="estimate-chip" id="demo-a-chip" hidden>Estimate Thu 2:00 PM ✓</div>
+                      </div>
+                    </div>
+                    <div class="iphone-home" aria-hidden="true"></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="feature-aside">
-              <ol class="story-steps">
-                <li>Call hits while you’re mid-job</li>
-                <li>Missed-call trigger fires SMS in seconds</li>
-                <li>Homeowner texts the need</li>
-                <li>Estimate chip offered — job stays warm</li>
-              </ol>
-              <p class="signal">99 Calls 2026 — 32.7% reply rate on missed-call texts (home-service study).</p>
-              <button type="button" class="btn btn-primary" data-run="missed">Run demo</button>
+            <div class="feature-side">
+              <h4>What we wire</h4>
+              <ul class="wire-list">
+                <li>Missed-call trigger → auto SMS in seconds</li>
+                <li>Qualify + book estimate chip</li>
+                <li>Day 3/7/14 follow-up that stops on reply</li>
+              </ul>
+              <p class="cite">Industry signal: <cite>99 Calls (2026)</cite> — speed-to-lead still decides who gets the job.</p>
+              <div class="btn-row">
+                <button type="button" class="btn btn-amber" id="demo-a-run">Run demo</button>
+                <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
+                <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Book%20Install%20Intensive%20%24497">Book $497</a>
+              </div>
             </div>
           </div>
         </article>
 
-        <!-- Demo 2: Social Engine -->
+        <!-- MODULE 5 — Demo B -->
         <article class="feature-demo" id="demo-social">
           <div class="feature-head">
             <div>
-              <p class="eyebrow">Social Engine</p>
-              <h3>Approve → post. Profile stays alive.</h3>
-              <p class="feature-outcome">Job-site photo → caption draft → one approve → IG / FB / Google scheduled.</p>
+              <p class="eyebrow">Maps → Social Engine · not inside Intensive by default</p>
+              <h3>Social Engine board</h3>
+              <p>Homeowners stalk IG and Google after a quote. Empty grid = distrust. Approve once → multi-platform.</p>
             </div>
-            <span class="price-tag price-amber">$1,997</span>
+            <span class="price-pill">$1,997</span>
           </div>
-          <div class="feature-body">
-            <div class="social-board" id="social-board">
-              <div class="social-inbox">
-                <div class="photo-card">
-                  <div class="photo-frame" aria-hidden="true">📷 Job site</div>
-                  <p class="caption-draft">“Finished the attic AC swap in Coweta — homeowner cool again before dinner.”</p>
-                </div>
-                <div class="approve-row">
-                  <label class="toggle">
-                    <input type="checkbox" id="plat-ig" checked />
-                    <span>Instagram</span>
-                  </label>
-                  <label class="toggle">
-                    <input type="checkbox" id="plat-fb" checked />
-                    <span>Facebook</span>
-                  </label>
-                  <label class="toggle">
-                    <input type="checkbox" id="plat-gmb" checked />
-                    <span>Google</span>
-                  </label>
-                  <button type="button" class="btn btn-primary btn-sm" id="social-approve">Approve &amp; schedule</button>
-                </div>
+          <div class="social-board" id="social-board">
+            <div class="social-draft">
+              <div class="job-photo" aria-hidden="true">
+                <span>Job photo</span>
+                <span class="job-photo-sub">AC install · Newnan</span>
               </div>
-              <div class="social-calendar" aria-live="polite">
-                <p class="cal-label">This week</p>
-                <div class="cal-chips" id="cal-chips">
-                  <p class="cal-empty">Approve to drop calendar chips</p>
-                </div>
-              </div>
+              <label class="caption-label" for="social-caption">Caption draft</label>
+              <textarea id="social-caption" rows="3" readonly>Just wrapped a full system swap in Coweta County. Clean attic work, same-day cool. Grateful for the trust — call or text when you’re ready.</textarea>
             </div>
-            <p class="signal">Homeowners stalk your profile after Google. An empty grid loses the job before the estimate.</p>
+            <div class="social-controls">
+              <p class="ba-label">Post to</p>
+              <div class="platform-toggles" role="group" aria-label="Platforms">
+                <button type="button" class="toggle on" data-platform="ig" aria-pressed="true">IG</button>
+                <button type="button" class="toggle on" data-platform="fb" aria-pressed="true">FB</button>
+                <button type="button" class="toggle" data-platform="google" aria-pressed="false">Google</button>
+              </div>
+              <button type="button" class="btn btn-primary" id="social-approve">Approve &amp; Schedule</button>
+              <p class="toast" id="social-toast" hidden role="status"></p>
+              <div class="calendar-chips" id="calendar-chips" aria-live="polite"></div>
+              <p class="faint">Custom system · $1,997 — not bundled in Intensive by default.</p>
+              <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
+              <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Social%20Engine%20%241%2C997">Ask about Social Engine</a>
+            </div>
           </div>
         </article>
 
-        <!-- Demo 3: Team Agents -->
+        <!-- MODULE 6 — Demo C -->
         <article class="feature-demo" id="demo-team">
           <div class="feature-head">
             <div>
-              <p class="eyebrow">Team Agent Stack</p>
-              <h3>Grok desk + Hermes board</h3>
-              <p class="feature-outcome">Owner assistant with memory. Orchestrator + specialists with an audit trail.</p>
+              <p class="eyebrow">Maps → Team Agent Stack</p>
+              <h3>Team Agents — Grok desk + Hermes board</h3>
+              <p>Your brain is the CRM. Texts everywhere. Assistants with memory + durable handoffs — not a website chatbot widget.</p>
             </div>
-            <span class="price-tag">$3,497</span>
+            <span class="price-pill">$3,497</span>
           </div>
-          <div class="feature-body team-split">
-            <div class="grok-desk" id="grok-desk">
-              <div class="desk-bar">Grok Bot · owner desk</div>
-              <div class="desk-chips" id="grok-chips">
-                <button type="button" class="desk-chip" data-chip="leads">Summarize today’s leads</button>
-                <button type="button" class="desk-chip" data-chip="followup">Draft estimate follow-up</button>
-                <button type="button" class="desk-chip" data-chip="crew">Prep crew texts</button>
+          <div class="team-split">
+            <div class="grok-desk">
+              <h4>Grok desk</h4>
+              <div class="grok-chips" role="group" aria-label="Grok actions">
+                <button type="button" class="chip" data-draft="summarize">Summarize leads</button>
+                <button type="button" class="chip" data-draft="followup">Draft follow-up</button>
+                <button type="button" class="chip" data-draft="crew">Crew texts</button>
               </div>
-              <div class="desk-out" id="grok-out" aria-live="polite">
-                <p class="faint">Tap a chip — desk responds with a working draft.</p>
+              <div class="draft-panel" id="draft-panel" aria-live="polite">
+                <p class="draft-placeholder">Tap a chip — draft appears here.</p>
               </div>
             </div>
-            <div class="hermes-board" id="hermes-board">
-              <div class="desk-bar hermes-bar">
-                <span>Hermes Agent · kanban</span>
+            <div class="hermes-board">
+              <div class="hermes-head">
+                <h4>Hermes Run board</h4>
                 <button type="button" class="btn btn-amber btn-sm" id="hermes-run">Run board</button>
               </div>
-              <div class="kanban">
-                <div class="lane" data-lane="inbox">
-                  <h4>Inbox</h4>
-                  <div class="lane-cards" id="lane-inbox"></div>
+              <div class="kanban" id="hermes-kanban">
+                <div class="kanban-col" data-col="orch">
+                  <p class="kanban-label">Orchestrator</p>
+                  <div class="card" id="hermes-card" data-stage="idle">Ready</div>
                 </div>
-                <div class="lane" data-lane="specialists">
-                  <h4>Specialists</h4>
-                  <div class="lane-cards" id="lane-specialists"></div>
+                <div class="kanban-col" data-col="work">
+                  <p class="kanban-label">Research / Draft / Review</p>
+                  <div class="card-slot" id="hermes-work"></div>
                 </div>
-                <div class="lane" data-lane="done">
-                  <h4>Done · audit</h4>
-                  <div class="lane-cards" id="lane-done"></div>
+                <div class="kanban-col" data-col="done">
+                  <p class="kanban-label">Done</p>
+                  <div class="card-slot" id="hermes-done"></div>
                 </div>
               </div>
+              <p class="audit-note" id="hermes-audit" hidden></p>
             </div>
           </div>
-        </article>
-
-        <!-- Also available -->
-        <div class="also" id="also">
-          <p class="also-label">Also available in Install Intensive / Care</p>
-          <div class="also-pills">
-            <span class="pill">Estimate follow-up</span>
-            <span class="pill">Reminders</span>
-            <span class="pill">Review ask</span>
-            <span class="pill">Speed-to-lead</span>
-            <span class="pill">Field report</span>
+          <div class="btn-row" style="margin-top:1.25rem">
+            <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
+            <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Team%20Agent%20Stack%20%243%2C497">Ask about Team Stack</a>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- MODULE 7 — Also pills -->
+    <section class="section also-section" id="also">
+      <div class="wrap">
+        <p class="eyebrow">Also in Intensive / Care</p>
+        <h2>Depth without eight fake demos</h2>
+        <div class="also-pills">
+          <details class="pill">
+            <summary>Estimate follow-up <span class="pkg-tag">$497</span></summary>
+            <p>Day 3/7/14 nudges that stop when they reply — wired in Intensive.</p>
+          </details>
+          <details class="pill">
+            <summary>Reminders <span class="pkg-tag">$497 · Care</span></summary>
+            <p>Appointment and payment reminders so fewer no-shows.</p>
+          </details>
+          <details class="pill">
+            <summary>Review ask <span class="pkg-tag">$497 · $1,997</span></summary>
+            <p>Post-job ask timed for when the customer is happiest.</p>
+          </details>
+          <details class="pill">
+            <summary>Speed-to-lead <span class="pkg-tag">$497</span></summary>
+            <p>First reply in seconds — the leak most shops still ignore.</p>
+          </details>
+          <details class="pill">
+            <summary>Field report <span class="pkg-tag">$3,497 · Care</span></summary>
+            <p>Crew notes → owner summary without living in the group chat.</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <!-- PACKAGES -->
-    <section class="section section-soft" id="packages">
+    <!-- MODULE 8 — Packages -->
+    <section class="section packages-section" id="packages">
       <div class="wrap">
         <p class="eyebrow">Packages</p>
-        <h2>High-ticket craft. Local-business reachable.</h2>
-        <p class="lead section-lead">Pick the leak you want plugged first — then grow into social and team agents.</p>
+        <h2>Pick a door. Prove one leak. Then grow.</h2>
+        <p class="graduation">Most shops start with Intensive to prove one leak is plugged — then add Social Engine or Team Agents.</p>
 
         <div class="pkg-grid">
-          <article class="pkg">
+          <article class="pkg-card featured">
+            <p class="pkg-who">For shops bleeding jobs on missed calls</p>
             <h3>Install Intensive</h3>
-            <div class="pkg-price">$497</div>
-            <p class="muted">One high-leverage workflow live in a half-day.</p>
-            <ul>
-              <li>Missed-call text-back or speed-to-lead</li>
-              <li>Estimate follow-up or review ask slice</li>
-              <li>You keep the login keys — we wire the board</li>
+            <p class="pkg-price">$497</p>
+            <ul class="pkg-outcomes">
+              <li>Missed calls text back in seconds</li>
+              <li>Estimate windows land without phone tag</li>
+              <li>Follow-up sequence that stops on reply</li>
             </ul>
+            <p class="pkg-includes"><strong>Included:</strong> Make.com missed-call → SMS, qualify/book chip, day 3/7/14 follow-up, review ask starter, half-day install.</p>
+            <p class="pkg-ttl"><strong>Time to live:</strong> half-day (Coweta on-site or remote)</p>
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-            <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Install%20Intensive%20%24497">Book Install Intensive</a>
+            <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Book%20Install%20Intensive%20%24497">Book $497</a>
           </article>
 
-          <article class="pkg pkg-featured">
-            <span class="pkg-flag">Most chosen path</span>
+          <article class="pkg-card">
+            <p class="pkg-who">For shops with empty IG / Google after quotes</p>
             <h3>Social Engine</h3>
-            <div class="pkg-price">$1,997</div>
-            <p class="muted">Approve → post multi-platform + social lead catch.</p>
-            <ul>
-              <li>Job photo → caption → approve → IG/FB/Google</li>
-              <li>DM/comment → lead card</li>
-              <li>Month looks alive when homeowners check you</li>
+            <p class="pkg-price">$1,997</p>
+            <ul class="pkg-outcomes">
+              <li>Approve once → IG / FB / Google</li>
+              <li>Calendar chips keep the grid alive</li>
+              <li>Fewer “who are you?” losses after estimates</li>
             </ul>
+            <p class="pkg-includes"><strong>Included:</strong> custom approve→schedule board, platform toggles, caption pipeline, 1–2 week build.</p>
+            <p class="pkg-ttl"><strong>Time to live:</strong> 1–2 week build</p>
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-            <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Social%20Engine%20%241997">Book Social Engine</a>
+            <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Social%20Engine%20%241%2C997">Ask about Social Engine</a>
           </article>
 
-          <article class="pkg pkg-accent">
-            <span class="pkg-flag pkg-flag-soft">Team ops</span>
+          <article class="pkg-card">
+            <p class="pkg-who">For owners whose brain is still the CRM</p>
             <h3>Team Agent Stack</h3>
-            <div class="pkg-price">$3,497</div>
-            <p class="muted">Grok Bot desk + Hermes Agent kanban for the team.</p>
-            <ul>
-              <li>Owner/office assistant with routines</li>
-              <li>Orchestrator + specialists with audit trail</li>
-              <li>Built for how teams will run agents next year</li>
+            <p class="pkg-price">$3,497</p>
+            <ul class="pkg-outcomes">
+              <li>Grok drafts follow-ups and crew texts</li>
+              <li>Hermes handoffs with audit trail</li>
+              <li>Office leverage without hiring another desk</li>
             </ul>
+            <p class="pkg-includes"><strong>Included:</strong> Grok desk + Hermes Run board, memory handoffs, field-report path, 1–2 week build.</p>
+            <p class="pkg-ttl"><strong>Time to live:</strong> 1–2 week build</p>
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-            <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Team%20Agent%20Stack%20%243497">Book Team Agent Stack</a>
+            <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Team%20Agent%20Stack%20%243%2C497">Ask about Team Stack</a>
           </article>
         </div>
 
-        <div class="pkg-extras">
-          <div class="pkg-extra">
-            <strong>Growth Care</strong>
-            <span class="pkg-price-sm">$497<span>/mo</span></span>
-            <p class="faint">Tweaks, light monitoring, one micro-automation per month.</p>
-            <!-- Cody: replace mailto with real contact URL -->
-            <a class="btn btn-ghost btn-sm" href="mailto:hello@mindguardlabs.com?subject=Growth%20Care%20%24497%2Fmo">Ask about Care</a>
-          </div>
-          <div class="pkg-extra">
-            <strong>Bundle</strong>
-            <span class="pkg-price-sm">$4,997</span>
-            <p class="faint">Social Engine + Team Agent Stack.</p>
+        <div class="pkg-secondary">
+          <article class="pkg-card compact">
+            <h3>Growth Care</h3>
+            <p class="pkg-price">$497<span>/mo</span></p>
+            <p>Keep scenarios healthy after install. Optional — not required to leave Intensive running alone.</p>
             <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-            <a class="btn btn-amber btn-sm" href="mailto:hello@mindguardlabs.com?subject=Bundle%20Social%20%2B%20Team%20%244997">Book the bundle</a>
-          </div>
+            <a class="btn btn-ghost btn-sm" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Growth%20Care%20%24497%2Fmo">Ask about Care</a>
+          </article>
+          <article class="pkg-card compact">
+            <h3>Bundle — Social + Team</h3>
+            <p class="pkg-price">$4,997</p>
+            <p>When you’re ready for both engines in one build. Secondary path — start with Intensive if you’re proving the leak first.</p>
+            <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
+            <a class="btn btn-ghost btn-sm" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Bundle%20%244%2C997">Ask about Bundle</a>
+          </article>
         </div>
-        <p class="faint center-note">No $20 / $250 sprint prices on this page. Worth is the point.</p>
       </div>
     </section>
 
-    <!-- PROOF -->
-    <section class="section" id="proof">
+    <!-- MODULE 9 — Industry proof -->
+    <section class="section proof-section" id="proof">
       <div class="wrap">
         <p class="eyebrow">Industry proof</p>
-        <h2>Attributed public sources — not invented clients.</h2>
+        <h2>This category works — cited, not invented</h2>
+        <p class="lead section-lead">No fake MindGuardLabs client quotes. Borrowed credibility only.</p>
         <div class="proof-chips">
-          <article class="proof-chip">
-            <span class="proof-src">99 Calls 2026</span>
-            <strong>32.7% reply</strong>
-            <p>14,354 missed-call texts · 192 home-service businesses · 74% of replies within 5 minutes.</p>
-          </article>
-          <article class="proof-chip">
-            <span class="proof-src">Vendor case · NeverMiss</span>
-            <strong>35% → 94%</strong>
-            <p>Prestige Air &amp; Heat — call capture up; ~42 jobs / ~$37.8k recovered in 30 days.</p>
-          </article>
-          <article class="proof-chip">
-            <span class="proof-src">HBR 2011</span>
-            <strong>~42h · 7×</strong>
-            <p>Avg response ~42 hours; contact within 1 hour ≈ 7× more likely to qualify.</p>
-          </article>
+          <blockquote class="proof-chip">
+            <p>Speed-to-lead still decides who wins the job.</p>
+            <footer>— <cite>Harvard Business Review (2011)</cite>, speed-to-lead research</footer>
+          </blockquote>
+          <blockquote class="proof-chip">
+            <p>Missed calls remain the #1 silent revenue leak for home services.</p>
+            <footer>— <cite>99 Calls (2026)</cite></footer>
+          </blockquote>
+          <blockquote class="proof-chip">
+            <p>Vendor case: Prestige Air recovered pipeline with missed-call automation.</p>
+            <footer>— <cite>NeverMiss</cite> (vendor case — labeled vendor)</footer>
+          </blockquote>
         </div>
-        <p class="faint" style="margin-top:1rem">MindGuardLabs client notes stay empty until Cody pastes real ones. Do not invent testimonials.</p>
+        <p class="faint proof-note">MindGuardLabs client testimonials: omitted until real. No placeholders shown.</p>
       </div>
     </section>
 
-    <!-- HOW -->
-    <section class="section section-soft" id="how">
+    <!-- MODULE 10 — How it works -->
+    <section class="section how-section" id="how">
       <div class="wrap">
         <p class="eyebrow">How it works</p>
-        <h2>Fit call → package → install → you run it.</h2>
-        <div class="steps">
-          <div class="step"><span class="n">1</span><h3>Fit call</h3><p class="muted">Biggest leak, tools today, who owns it.</p></div>
-          <div class="step"><span class="n">2</span><h3>Package</h3><p class="muted">$497 / $1,997 / $3,497.</p></div>
-          <div class="step"><span class="n">3</span><h3>Build</h3><p class="muted">Install window. You enter logins.</p></div>
-          <div class="step"><span class="n">4</span><h3>You run it</h3><p class="muted">Board live. Crew keeps working.</p></div>
-          <div class="step"><span class="n">5</span><h3>Optional Care</h3><p class="muted">$497/mo tweaks + one micro-auto.</p></div>
-        </div>
+        <h2>Fit → pay → install → you run it alone</h2>
+        <ol class="how-steps">
+          <li>
+            <strong>Fit call</strong>
+            <p>We map your leak (missed calls, dead social, or office chaos). Coweta on-site or remote.</p>
+          </li>
+          <li>
+            <strong>You keep the logins</strong>
+            <p>You type passwords. We never take ownership of your accounts.</p>
+          </li>
+          <li>
+            <strong>Install</strong>
+            <p>Half-day Intensive or 1–2 week Social / Team build. You trigger it once without us before we leave Intensive.</p>
+          </li>
+          <li>
+            <strong>Optional Care</strong>
+            <p>Growth Care ($497/mo) if you want ongoing scenario health — otherwise you run it alone.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-        <div class="cta-band">
-          <h2>Ready to catch the next job?</h2>
-          <p class="muted">Book the Install Intensive or talk Social Engine / Team Agent Stack.</p>
-          <div class="btn-row" style="justify-content:center">
-            <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-            <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Install%20Intensive%20%24497">Book — $497 Install</a>
-            <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=MindGuardLabs%20fit%20call">Email hello@mindguardlabs.com</a>
-          </div>
+    <!-- MODULE 11 — FAQ -->
+    <section class="section faq-section" id="faq">
+      <div class="wrap">
+        <p class="eyebrow">FAQ</p>
+        <h2>Objections, answered</h2>
+        <div class="faq-list">
+          <details>
+            <summary>I already have Jobber / ServiceTitan — why you?</summary>
+            <p>Those run the job. We plug the leak before the job exists — missed-call SMS, follow-up that stops on reply, and social that keeps proof alive after the estimate. They stack; they don’t replace each other.</p>
+          </details>
+          <details>
+            <summary>Who owns the Make.com scenario?</summary>
+            <p>You do. We build in your account. You keep the logins — you type passwords. We leave you with a working scenario you can trigger without us.</p>
+          </details>
+          <details>
+            <summary>How long until it works?</summary>
+            <p>Install Intensive: half-day. Social Engine and Team Agent Stack: typically 1–2 weeks to live. You trigger Intensive once without us before we leave.</p>
+          </details>
+          <details>
+            <summary>Do I need to understand AI?</summary>
+            <p>No. You need to answer texts and approve posts. Grok and Hermes are assistants with memory and handoffs — not something you prompt from scratch every day.</p>
+          </details>
+          <details>
+            <summary>Is Social Engine in the $497?</summary>
+            <p>No. Intensive covers missed-call recovery and follow-up. Social Engine ($1,997) is a separate custom board — approve → multi-platform. Ask if you want both.</p>
+          </details>
+          <details>
+            <summary>Remote vs Newnan / Coweta on-site?</summary>
+            <p>Both. Coweta-area shops can get on-site Intensive. Remote works for the same installs over screen share. You still type your own passwords either way.</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <section class="section-tight" id="market">
-      <div class="wrap">
-        <p class="eyebrow">Market context</p>
-        <h2>Videos (not Cody’s channel unless labeled)</h2>
-        <div class="vid-list">
-          <a href="https://youtu.be/eykptPwinDo" target="_blank" rel="noopener">youtu.be/eykptPwinDo</a>
-          <a href="https://youtu.be/r3P1yMEXpuk" target="_blank" rel="noopener">youtu.be/r3P1yMEXpuk</a>
-          <a href="https://youtu.be/tgjYMym_0-c" target="_blank" rel="noopener">youtu.be/tgjYMym_0-c</a>
-          <a href="https://youtu.be/Y3PcRp5RFzk" target="_blank" rel="noopener">youtu.be/Y3PcRp5RFzk</a>
-          <a href="https://youtu.be/3dUsgHWUkJA" target="_blank" rel="noopener">youtu.be/3dUsgHWUkJA</a>
+    <!-- MODULE 12 — Final CTA -->
+    <section class="section final-cta" id="book">
+      <div class="wrap final-inner">
+        <h2>Pick the leak. We’ll install the fix.</h2>
+        <p class="lead">Start with $497 proof — or ask about Social Engine / Team Agents once you’ve seen yourself in the demos.</p>
+        <div class="btn-row">
+          <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
+          <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Book%20Install%20Intensive%20%24497">Book $497</a>
+          <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Social%20Engine%20%241%2C997">Ask about Social Engine</a>
+          <a class="btn btn-ghost" href="mailto:hello@mindguardlabs.com?subject=Ask%20about%20Team%20Agent%20Stack%20%243%2C497">Ask about Team Agents</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="wrap footer-grid">
-      <div>
-        <strong>MindGuardLabs</strong> · Good Ground LLC<br />
-        Coweta-area / remote<br />
-        <span class="faint">Owners enter their own logins · no secrets in chat.</span>
-      </div>
-      <div class="footer-links">
-        <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-        <a href="mailto:hello@mindguardlabs.com?subject=Install%20Intensive%20%24497">Book</a>
-        <a href="mailto:hello@mindguardlabs.com">Contact</a>
-        <a href="#demos">Demos</a>
-      </div>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>MindGuardLabs</strong> · Good Ground LLC · Coweta-area / remote</p>
+      <p class="faint">No secrets in chat. Bloom Guard untouched. hello@mindguardlabs.com</p>
     </div>
   </footer>
-
-  <!-- Mobile sticky CTA -->
-  <div class="sticky-cta" id="sticky-cta">
-    <!-- Cody: replace mailto with real Stripe/calendar booking URL -->
-    <a class="btn btn-primary" href="mailto:hello@mindguardlabs.com?subject=Install%20Intensive%20%24497">Book Install — $497</a>
-    <a class="btn btn-ghost btn-sm" href="#demos">Demos</a>
-  </div>
 
   <script src="app.js"></script>
 </body>
