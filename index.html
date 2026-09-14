@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="MindGuardLabs installs contractor-ready automations — missed-call recovery, Make.com social, and team agents (Grok Bot + Hermes)." />
+  <title>MindGuardLabs — Catch the job while you’re on the job</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@450;550;650;750;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
+        <span class="logo">MG</span>
+        <span>MindGuardLabs</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#demos">Demos</a>
+        <a href="#packages">Packages</a>
+        <a href="#proof">Industry proof</a>
+        <a href="#how">How it works</a>
+        <a class="btn btn-primary btn-sm" href="{{BOOKING_LINK}}">Book Install — $497</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">MindGuardLabs · Good Ground LLC</p>
+          <h1>Catch the job while you’re still on the job.</h1>
+          <p class="lead">
+            We install contractor-ready automations — missed-call recovery, social that stays alive, and team agents
+            (<strong>Grok Bot</strong> + <strong>Hermes Agent</strong>). Automations that catch jobs while you’re on the job.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#demos">See before/after demos</a>
+            <a class="btn btn-ghost" href="{{BOOKING_LINK}}">Book Install Intensive — $497</a>
+          </div>
+          <div class="chips">
+            <span class="chip chip-teal">Contractors &amp; home services</span>
+            <span class="chip">Make.com</span>
+            <span class="chip chip-teal">Grok Bot</span>
+            <span class="chip chip-amber">Hermes Agent</span>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Missed-call demo preview">
+          <div class="phone-mock" id="hero-demo">
+            <div class="phone-bar"><span>Field phone</span><span>Demo UI</span></div>
+            <div class="call-banner" data-step>Incoming call — homeowner · you’re on a ladder</div>
+            <div class="sms-thread">
+              <div class="bubble them hidden-anim" data-step>Missed. Voicemail left. They’re already dialing the next shop.</div>
+              <div class="bubble us hidden-anim" data-step>Hey, it’s {{Shop}} — stuck on a job. Text me what you need and I’ll get you on the board.</div>
+              <div class="bubble them hidden-anim" data-step>AC died. Can someone look tomorrow?</div>
+              <div class="bubble us slot hidden-anim" data-step>Estimate Thu 2pm?</div>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:.9rem">
+            <button type="button" class="btn btn-amber btn-sm" id="hero-run">Run after</button>
+            <span class="faint">Interactive mock — no live SMS</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- DEMOS -->
+    <section class="section" id="demos">
+      <div class="wrap">
+        <p class="eyebrow">Before → After</p>
+        <h2>Play the leaks. Feel the worth.</h2>
+        <p class="lead">Interactive mocks of the workflows that recover calls, keep quotes warm, and keep your profile looking alive when homeowners check you.</p>
+
+        <div class="demo-grid">
+          <!-- A -->
+          <article class="demo-card" id="demo-a">
+            <div class="demo-head">
+              <div>
+                <h3>A. Missed-call text-back</h3>
+                <p class="demo-outcome">Recover the conversation by text while you’re still on the roof.</p>
+              </div>
+              <span class="badge">$497</span>
+            </div>
+            <div class="ba-toggle" role="group" aria-label="Before or after">
+              <button type="button" data-view="before" class="active">Before</button>
+              <button type="button" data-view="after">After</button>
+            </div>
+            <div class="panel before">
+              <div class="panel-label">Before</div>
+              <div class="stage-row">
+                <div class="line bad">Phone rings on the ladder → you can’t answer</div>
+                <div class="line bad">Voicemail. Homeowner calls the next company.</div>
+                <div class="line bad">Job gone before you wipe the sweat off.</div>
+              </div>
+            </div>
+            <div class="panel after" hidden>
+              <div class="panel-label">After</div>
+              <div class="stage-row" data-stage>
+                <div class="line good hidden-anim" data-step>Missed call detected</div>
+                <div class="line good hidden-anim" data-step>SMS in seconds: “Hey, it’s {{Shop}} — stuck on a job, text me what you need”</div>
+                <div class="line good hidden-anim" data-step>Chat recovers → estimate slot offered</div>
+              </div>
+            </div>
+            <ul class="wire-list">
+              <li>Missed-call trigger → SMS template</li>
+              <li>Reply routing to your phone</li>
+              <li>Optional estimate-window chip</li>
+            </ul>
+            <div class="demo-foot">
+              <button type="button" class="btn btn-primary btn-sm" data-run="a">Run after</button>
+              <span class="badge badge-soft">Install Intensive</span>
+            </div>
+            <p class="signal">Industry signal: 99 Calls 2026 — 32.7% reply rate on missed-call texts (home-service study).</p>
+          </article>
+
+          <!-- B -->
+          <article class="demo-card" id="demo-b">
+            <div class="demo-head">
+              <div>
+                <h3>B. Speed-to-lead (form / Facebook)</h3>
+                <p class="demo-outcome">Instant ack + qualify while competitors are still “checking email tonight.”</p>
+              </div>
+              <span class="badge">$497</span>
+            </div>
+            <div class="ba-toggle">
+              <button type="button" data-view="before" class="active">Before</button>
+              <button type="button" data-view="after">After</button>
+            </div>
+            <div class="panel before">
+              <div class="panel-label">Before</div>
+              <div class="stage-row">
+                <div class="line bad">Form sits until tonight</div>
+                <div class="line bad">Welcome to the 42-hour world</div>
+                <div class="line bad">Lead cools; they book the shop that texted back</div>
+              </div>
+            </div>
+            <div class="panel after" hidden>
+              <div class="panel-label">After</div>
+              <div class="stage-row" data-stage>
+                <div class="line good hidden-anim" data-step>Instant SMS/email acknowledgment</div>
+                <div class="line good hidden-anim" data-step>2–3 qualify questions</div>
+                <div class="line good hidden-anim" data-step>Calendar offer for estimate window</div>
+              </div>
+            </div>
+            <ul class="wire-list">
+              <li>Web / FB lead webhook → text + email</li>
+              <li>Qualify branch</li>
+              <li>Book-link handoff</li>
+            </ul>
+            <div class="demo-foot">
+              <button type="button" class="btn btn-primary btn-sm" data-run="b">Run after</button>
+              <span class="badge badge-soft">Install Intensive · upsell path</span>
+            </div>
+            <p class="signal">Industry signal: HBR 2011 — avg response ~42h; contact within 1 hour ≈ 7× more likely to qualify.</p>
+          </article>
+
+          <!-- C -->
+          <article class="demo-card" id="demo-c">
+            <div class="demo-head">
+              <div>
+                <h3>C. Estimate follow-up (Day 3 / 7 / 14)</h3>
+                <p class="demo-outcome">Quotes stop dying in sticky-note purgatory.</p>
+              </div>
+              <span class="badge">$497</span>
+            </div>
+            <div class="ba-toggle">
+              <button type="button" data-view="before" class="active">Before</button>
+              <button type="button" data-view="after">After</button>
+            </div>
+            <div class="panel before">
+              <div class="panel-label">Before</div>
+              <div class="stage-row">
+                <div class="line bad">Quote PDF sent… then forgotten</div>
+                <div class="line bad">Sticky note on the truck dash</div>
+                <div class="line bad">Job goes to whoever nudged</div>
+              </div>
+            </div>
+            <div class="panel after" hidden>
+              <div class="panel-label">After</div>
+              <div class="stage-row" data-stage>
+                <div class="line good hidden-anim" data-step>Day 3 check-in auto-sends</div>
+                <div class="line good hidden-anim" data-step>Day 7 / Day 14 nudges</div>
+                <div class="line good hidden-anim" data-step>Stops on reply · owner notified “hot reply”</div>
+              </div>
+            </div>
+            <ul class="wire-list">
+              <li>Sequence timers tied to quote date</li>
+              <li>Stop-on-reply rule</li>
+              <li>Owner ping on engagement</li>
+            </ul>
+            <div class="demo-foot">
+              <button type="button" class="btn btn-primary btn-sm" data-run="c">Run after</button>
+              <span class="badge badge-soft">Intensive scope note / add-on</span>
+            </div>
+          </article>
+
+          <!-- D -->
+          <article class="demo-card" id="demo-d">
+            <div class="demo-head">
+              <div>
+                <h3>D. Social Engine board (Make.com)</h3>
+                <p class="demo-outcome">Job-site photo → approve → multi-platform post. Profile looks alive.</p>
+              </div>
+              <span class="badge badge-amber">$1,997</span>
+            </div>
+            <div class="ba-toggle">
+              <button type="button" data-view="before" class="active">Before</button>
+              <button type="button" data-view="after">After</button>
+            </div>
+            <div class="panel before">
+              <div class="panel-label">Before</div>
+              <div class="stage-row">
+                <div class="line bad">Last Instagram post: 47 days ago</div>
+                <div class="line bad">Homeowner checks you after Google — looks abandoned</div>
+              </div>
+            </div>
+            <div class="panel after" hidden>
+              <div class="panel-label">After</div>
+              <div class="stage-row" data-stage>
+                <div class="line good hidden-anim" data-step>Job photo uploaded → caption draft ready</div>
+                <div class="line good hidden-anim" data-step>You approve once</div>
+                <div class="line good hidden-anim" data-step>IG / FB / Google scheduled</div>
+              </div>
+              <div class="platform-toggles" aria-label="Platforms">
+                <label><input type="checkbox" checked /><span> Instagram</span></label>
+                <label><input type="checkbox" checked /><span> Facebook</span></label>
+                <label><input type="checkbox" checked /><span> Google</span></label>
+              </div>
+              <div class="cal-chips">
+                <span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span>
+              </div>
+            </div>
+            <ul class="wire-list">
+              <li>Photo inbox → caption draft</li>
+              <li>Approve gate</li>
+              <li>Multi-platform schedule via Make.com</li>
+            </ul>
+            <div class="demo-foot">
+              <button type="button" class="btn btn-primary btn-sm" data-run="d">Approve &amp; Schedule</button>
+              <span class="badge badge-amber">Social Engine specialty</span>
+            </div>
+          </article>
+
+          <!-- E -->
+          <article class="demo-card" id="demo-e">
+            <div class="demo-head">
+              <div>
+                <h3>E. Social DM → lead card</h3>
+                <p class="demo-outcome">“How much for a deck?” becomes a tracked lead — not a forgotten thread.</p>
+              </div>
+              <span class="badge badge-amber">$1,997</span>
+            </div>
+            <div class="ba-toggle">
+              <button type="button" data-view="before" class="active">Before</button>
+              <button type="button" data-view="after">After</button>
+            </div>
+            <div class="panel before">
+              <div class="panel-label">Before</div>
+              <div class="stage-row">
+                <div class="line bad">Inquiry buried in DMs</div>
+                <div class="line bad">No CRM row. No follow-up. Ghosted by accident.</div>
+              </div>
+            </div>
+            <div class="panel after" hidden>
+              <div class="panel-label">After</div>
+              <div class="stage-row" data-stage>
+                <div class="line good hidden-anim" data-step>Auto acknowledgment in DM</div>
+                <div class="line good hidden-anim" data-step>Lead card created in sheet/CRM</div>
+                <div class="line good hidden-anim" data-step>Optional book link attached</div>
+              </div>
+            </div>
+            <ul class="wire-list">
+              <li>DM/comment watch</li>
+              <li>Lead card fields</li>
+              <li>Booking link optional</li>
+            </ul>
+            <div class="demo-foot">
+              <button type="button" class="btn btn-primary btn-sm" data-run="e">Run after</button>
+              <span class="badge badge-amber">Social Engine</span>
+            </div>
+          </article>
+
+          <!-- F -->
+          <article class="demo-card" id="demo-f">
+            <div class="demo-head">
+              <div>
+                <h3>F. Post-job review ask</h3>
+                <p class="demo-outcome">Happy customers stop vanishing without a Google trail.</p>
+              </div>
+              <span class="badge">$497</span>
+            </div>
+            <div class="ba-toggle">
+              <button type="button" data-view="before" class="active">Before</button>
+              <button type="button" data-view="after">After</button>
+            </div>
+            <div class="panel before">
+              <div class="panel-label">Before</div>
+              <div class="stage-row">
+                <div class="line bad">Job done. Customer thrilled.</div>
+                <div class="line bad">Zero Google review. Proof evaporates.</div>
+              </div>
+            </div>
+            <div class="panel after" hidden>
+              <div class="panel-label">After · demo UI</div>
+              <div class="stage-row" data-stage>
+                <div class="line good hidden-anim" data-step>Invoice paid → polite SMS</div>
+                <div class="line good hidden-anim" data-step>Direct Google review link</div>
+                <div class="line good hidden-anim" data-step>★★★★★ confirmation (demo UI — not a real review)</div>
+              </div>
+            </div>
+            <ul class="wire-list">
+              <li>Paid/complete trigger</li>
+              <li>Review SMS template + link</li>
+              <li>Optional Growth Care monitoring</li>
+            </ul>
+            <div class="demo-foot">
+              <button type="button" class="btn btn-primary btn-sm" data-run="f">Run after</button>
+              <span class="badge badge-soft">Install / Care add-on</span>
+            </div>
+          </article>
+
+          <!-- G -->
+          <article class="demo-card featured" id="demo-g">
+            <div class="demo-head">
+              <div>
+                <h3>G. Grok Bot team desk <span class="badge">FEATURED</span></h3>
+                <p class="demo-outcome">Real assistant with memory — not a website chatbot widget.</p>
+              </div>
+              <span class="badge">$3,497</span>
+            </div>
+            <div class="ba-toggle">
+              <button type="button" data-view="before" class="active">Before</button>
+              <button type="button" data-view="after">After</button>
+            </div>
+            <div class="panel before">
+              <div class="panel-label">Before</div>
+              <div class="stage-row">
+                <div class="line bad">Owner’s brain is the CRM</div>
+                <div class="line bad">Texts everywhere. Nothing summarized.</div>
+              </div>
+            </div>
+            <div class="panel after" hidden>
+              <div class="panel-label">After</div>
+              <div class="stage-row" data-stage>
+                <div class="hidden-anim" data-step>
+                  <div class="desk-chips">
+                    <span>Summarize today’s leads</span>
+                    <span>Draft estimate follow-up</span>
+                    <span>Prep crew texts for tomorrow</span>
+                  </div>
+                </div>
+                <div class="line good hidden-anim" data-step>Desk remembers routines · office + owner share context</div>
+              </div>
+            </div>
+            <ul class="wire-list">
+              <li>Grok Bot desk for owner/office</li>
+              <li>Lead summarize + draft follow-ups</li>
+              <li>Tomorrow run-of-show prep</li>
+            </ul>
+            <div class="demo-foot">
+              <button type="button" class="btn btn-primary btn-sm" data-run="g">Run after</button>
+              <span class="badge">Team Agent Stack</span>
+            </div>
+          </article>
+
+          <!-- H -->
+          <article class="demo-card featured" id="demo-h">
+            <div class="demo-head">
+              <div>
+                <h3>H. Hermes Agent kanban <span class="badge">FEATURED</span></h3>
+                <p class="demo-outcome">Orchestrator + specialists with an audit trail — durable multi-step work.</p>
+              </div>
+              <span class="badge">$3,497</span>
+            </div>
+            <div class="ba-toggle">
+              <button type="button" data-view="before" class="active">Before</button>
+              <button type="button" data-view="after">After</button>
+            </div>
+            <div class="panel before">
+              <div class="panel-label">Before</div>
+              <div class="stage-row">
+                <div class="line bad">One fragile ChatGPT thread</div>
+                <div class="line bad">Context lost. No handoffs. No trail.</div>
+              </div>
+            </div>
+            <div class="panel after" hidden>
+              <div class="panel-label">After</div>
+              <div class="stage-row" data-stage>
+                <div class="line good hidden-anim" data-step>Orchestrator card splits work</div>
+                <div class="hidden-anim" data-step>
+                  <div class="kanban">
+                    <div class="col"><h4>Research</h4><div class="ticket">Competitor posts</div></div>
+                    <div class="col"><h4>Draft</h4><div class="ticket">Caption pack</div></div>
+                    <div class="col"><h4>Review</h4><div class="ticket">Owner approve</div></div>
+                  </div>
+                </div>
+                <div class="line good hidden-anim" data-step>Handoffs + completion notes logged</div>
+              </div>
+            </div>
+            <ul class="wire-list">
+              <li>Hermes orchestrator board</li>
+              <li>Specialist lanes (content, follow-ups, ops)</li>
+              <li>Audit trail on every handoff</li>
+            </ul>
+            <div class="demo-foot">
+              <button type="button" class="btn btn-primary btn-sm" data-run="h">Run board</button>
+              <span class="badge">Team Agent Stack</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="section" id="packages">
+      <div class="wrap">
+        <p class="eyebrow">Offer ladder</p>
+        <h2>High-ticket craft. Local-business reachable.</h2>
+        <p class="lead">Pick the leak you want plugged first — then grow into social and team agents.</p>
+
+        <div class="price-grid">
+          <article class="price-card">
+            <span class="badge">Start here</span>
+            <h3>Install Intensive</h3>
+            <div class="amount">$497</div>
+            <p class="muted">One high-leverage workflow live in a half-day.</p>
+            <ul>
+              <li>Missed-call text-back or speed-to-lead</li>
+              <li>Estimate follow-up or review ask slice</li>
+              <li>You keep the login keys — we wire the board</li>
+            </ul>
+            <a class="btn btn-ghost" href="{{BOOKING_LINK}}">Book Install Intensive</a>
+          </article>
+
+          <article class="price-card">
+            <span class="badge badge-amber">Make.com specialty</span>
+            <h3>Social Engine</h3>
+            <div class="amount">$1,997</div>
+            <p class="muted">Approve → post multi-platform + social lead catch.</p>
+            <ul>
+              <li>Job photo → caption → approve → IG/FB/Google</li>
+              <li>DM/comment → lead card</li>
+              <li>Month looks alive when homeowners stalk your profile</li>
+            </ul>
+            <a class="btn btn-primary" href="{{BOOKING_LINK}}">Book Social Engine</a>
+          </article>
+
+          <article class="price-card featured">
+            <span class="badge">FEATURED</span>
+            <h3>Team Agent Stack</h3>
+            <div class="amount">$3,497</div>
+            <p class="muted">Grok Bot desk + Hermes Agent kanban for the team.</p>
+            <ul>
+              <li>Owner/office assistant with routines</li>
+              <li>Orchestrator + specialists with audit trail</li>
+              <li>Built for how teams will run agents next year</li>
+            </ul>
+            <a class="btn btn-primary" href="{{BOOKING_LINK}}">Book Team Agent Stack</a>
+          </article>
+        </div>
+
+        <div class="care-row">
+          <div>
+            <strong>Growth Care</strong> · <span class="amount" style="font-size:1.25rem">$497<span>/mo</span></span>
+            <p class="muted" style="margin:.35rem 0 0">Tweaks, light monitoring, one micro-automation per month.</p>
+          </div>
+          <a class="btn btn-ghost" href="{{CONTACT}}">Ask about Care</a>
+        </div>
+
+        <div class="bundle-chip">
+          <div>
+            <strong>Optional bundle</strong> — Social Engine + Team Agent Stack
+            <div class="amount" style="font-size:1.35rem;margin-top:.25rem">$4,997</div>
+          </div>
+          <a class="btn btn-amber" href="{{BOOKING_LINK}}">Book the bundle</a>
+        </div>
+        <p class="micro">No $20 / $250 sprint prices on this page. Worth is the point.</p>
+      </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="section" id="proof">
+      <div class="wrap">
+        <p class="eyebrow">What owners report</p>
+        <h2>Industry results — not invented clients.</h2>
+        <p class="lead">Attributed public sources only. MindGuardLabs client notes stay empty until Cody pastes real ones.</p>
+
+        <h3 style="margin-top:1.5rem">A) Industry results (attributable)</h3>
+        <div class="proof-grid">
+          <article class="proof-card">
+            <span class="chip chip-teal">99 Calls 2026</span>
+            <div class="stat">32.7% reply</div>
+            <p class="muted">14,354 missed-call texts across 192 home-service businesses; 74% of replies within 5 minutes; 1,619 conversations became billable leads.</p>
+            <p class="src">Source: 99calls.com study page · industry signal, not a MindGuardLabs client result</p>
+          </article>
+          <article class="proof-card">
+            <span class="chip chip-amber">Vendor case study</span>
+            <div class="stat">35% → 94%</div>
+            <p class="muted">Prestige Air &amp; Heat (Fort Worth) via NeverMiss — call capture up; 42 additional jobs / ~$37,800 recovered in 30 days.</p>
+            <p class="src">Source: NeverMiss HVAC case · labeled vendor case study — not a MindGuardLabs client</p>
+          </article>
+          <article class="proof-card">
+            <span class="chip">HBR 2011</span>
+            <div class="stat">~42h · 7×</div>
+            <p class="muted">Audit of 2,241 US firms: average response ~42 hours; 23% never responded; contact within 1 hour ≈ 7× more likely to qualify vs waiting another hour.</p>
+            <p class="src">Source: Oldroyd, McElheran, Elkington — HBR Mar 2011 (“The Short Life of Online Sales Leads”)</p>
+          </article>
+        </div>
+        <p class="faint" style="margin-top:1rem">MIT / InsideSales 2007 (often misquoted as HBR): contacting in 5 vs 30 minutes sharply drops odds of contact/qualify — attribute MIT/InsideSales, not HBR, if you cite that multiplier.</p>
+
+        <div class="placeholder-block" data-placeholder="true">
+          <p class="ph-label">Real client notes — paste when ready (data-placeholder=&quot;true&quot;)</p>
+          <p class="faint" style="margin:0 0 1rem">Do not invent MindGuardLabs testimonials. Replace placeholders before launch.</p>
+          <div class="ph-grid">
+            <article class="ph-card">
+              <strong>{{CLIENT_NAME}}</strong> · {{TRADE}} · {{LOCATION}}
+              <div class="stars" aria-hidden="true">☆☆☆☆☆</div>
+              <p class="muted">“{{QUOTE}}”</p>
+              <p class="faint">Service: Social Engine / Install Intensive / Team Agent Stack</p>
+            </article>
+            <article class="ph-card">
+              <strong>{{CLIENT_NAME}}</strong> · {{TRADE}} · {{LOCATION}}
+              <div class="stars" aria-hidden="true">☆☆☆☆☆</div>
+              <p class="muted">“{{QUOTE}}”</p>
+              <p class="faint">Service: Social Engine / Install Intensive / Team Agent Stack</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section-tight" id="why">
+      <div class="wrap">
+        <p class="eyebrow">Why this stack</p>
+        <h2>Revenue leaks first. Proof second. Agents third.</h2>
+        <div class="why-grid">
+          <article class="why-card">
+            <h3>Catch the leaks</h3>
+            <p class="muted">Calls, quotes, and reviews are where jobs quietly leave. Plug those before fancy dashboards.</p>
+          </article>
+          <article class="why-card">
+            <h3>Social that stays alive</h3>
+            <p class="muted">Social Engine keeps proof visible when homeowners stalk your profile after a search or review.</p>
+          </article>
+          <article class="why-card">
+            <h3>Grok Bot + Hermes</h3>
+            <p class="muted">Team ops as agents become normal. We install what still makes sense next year.</p>
+          </article>
+        </div>
+        <p class="lead" style="margin-top:1.25rem">The space is changing — we install what still makes sense next year.</p>
+      </div>
+    </section>
+
+    <!-- HOW -->
+    <section class="section" id="how">
+      <div class="wrap">
+        <p class="eyebrow">How it works</p>
+        <h2>Fit call → package → install → you run it.</h2>
+        <div class="steps">
+          <div class="step"><div class="n">1</div><h3>Fit call</h3><p class="muted">Biggest leak, tools today, who owns it.</p></div>
+          <div class="step"><div class="n">2</div><h3>Package</h3><p class="muted">$497 / $1,997 / $3,497 — pick for outcome.</p></div>
+          <div class="step"><div class="n">3</div><h3>Build</h3><p class="muted">Install window. You enter your own logins.</p></div>
+          <div class="step"><div class="n">4</div><h3>You run it</h3><p class="muted">Board live. Crew keeps working.</p></div>
+          <div class="step"><div class="n">5</div><h3>Optional Care</h3><p class="muted">$497/mo tweaks + one micro-automation.</p></div>
+        </div>
+        <div class="qualify">
+          <strong>On the fit call we ask</strong>
+          <ul>
+            <li>Biggest leak: calls / quotes / social / team chaos?</li>
+            <li>What tools do you already pay for?</li>
+            <li>Who owns follow-up today?</li>
+            <li>What does 30-day success look like?</li>
+          </ul>
+        </div>
+        <div class="cta-band" style="margin-top:1.75rem">
+          <h2 style="margin-bottom:.5rem">Ready to catch the next job?</h2>
+          <p class="muted" style="margin:0 auto 1rem;max-width:32rem">Book the Install Intensive or talk Social Engine / Team Agent Stack.</p>
+          <div class="btn-row" style="justify-content:center">
+            <a class="btn btn-primary" href="{{BOOKING_LINK}}">Book — $497 Install</a>
+            <a class="btn btn-ghost" href="{{CONTACT}}">Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET VIDEO -->
+    <section class="section-tight" id="market">
+      <div class="wrap">
+        <p class="eyebrow">Market education</p>
+        <h2>Context videos (not Cody’s channel unless labeled)</h2>
+        <div class="vid-list">
+          <a href="https://youtu.be/eykptPwinDo" target="_blank" rel="noopener">youtu.be/eykptPwinDo</a>
+          <a href="https://youtu.be/r3P1yMEXpuk" target="_blank" rel="noopener">youtu.be/r3P1yMEXpuk</a>
+          <a href="https://youtu.be/tgjYMym_0-c" target="_blank" rel="noopener">youtu.be/tgjYMym_0-c</a>
+          <a href="https://youtu.be/Y3PcRp5RFzk" target="_blank" rel="noopener">youtu.be/Y3PcRp5RFzk</a>
+          <a href="https://youtu.be/3dUsgHWUkJA" target="_blank" rel="noopener">youtu.be/3dUsgHWUkJA</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <strong style="color:var(--text)">MindGuardLabs</strong> · Good Ground LLC<br />
+        Coweta-area / remote<br />
+        Owners enter their own logins · no secrets in chat.
+        <div class="nova-chip" title="Quiet Mac app chip — not the hero">NovaBloom Mac app (separate) · not included in these packages</div>
+      </div>
+      <div>
+        <a href="{{BOOKING_LINK}}">Book</a> · <a href="{{CONTACT}}">Contact</a> · <a href="#demos">Demos</a><br />
+        <span class="faint">Placeholders: {{BOOKING_LINK}} · {{CONTACT}} — replace before launch.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
