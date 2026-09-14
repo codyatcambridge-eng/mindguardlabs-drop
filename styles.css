@@ -1200,7 +1200,7 @@ h4 { font-size: 1.05rem; font-family: var(--font); letter-spacing: 0; }
 }
 .variant-lede strong { color: var(--text); }
 
-/* Variant B — lead board */
+/* Variant B — shared before/after board (+ Gmail dump) */
 .lead-board {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1278,6 +1278,124 @@ h4 { font-size: 1.05rem; font-family: var(--font); letter-spacing: 0; }
 .lead-dl dt { margin: 0; color: var(--faint); font-weight: 600; }
 .lead-dl dd { margin: 0; color: var(--text); }
 .lead-book { margin-top: 0.75rem; }
+
+/* Variant B — Gmail photo dump */
+.camera-roll {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.roll-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+.roll-thumb {
+  display: grid;
+  place-items: center;
+  min-height: 4.2rem;
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px dashed rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+.boost-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+.gmail-mock {
+  margin-top: 0.85rem;
+  border: 1px solid rgba(61, 139, 253, 0.35);
+  border-radius: var(--radius-sm);
+  background: rgba(61, 139, 253, 0.07);
+  overflow: hidden;
+}
+.gmail-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid rgba(61, 139, 253, 0.25);
+  background: rgba(0,0,0,0.18);
+  font-size: 0.82rem;
+}
+.gmail-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+}
+.gmail-row {
+  padding: 0.85rem 0.9rem;
+}
+.gmail-from {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--faint);
+  margin-bottom: 0.25rem;
+}
+.gmail-row strong {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--text);
+}
+.gmail-attach, .attach-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.ai-queue {
+  margin-top: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(62, 207, 142, 0.35);
+  background: rgba(62, 207, 142, 0.08);
+}
+.queue-line {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.gmail-attach-card {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 0.65rem 0 0.85rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.04);
+}
+.attach-thumb {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--line);
+}
+.attach-name {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 650;
+  color: var(--text);
+}
+.ghostwriter-block .ba-label { margin-bottom: 0.35rem; }
+.brand-voice {
+  border-color: rgba(245, 166, 35, 0.35);
+  background: rgba(245, 166, 35, 0.08);
+  font-style: italic;
+}
+.gmail-mock-deliver { margin-top: 0; }
 
 /* Variant C — voice pipeline */
 .voice-head {

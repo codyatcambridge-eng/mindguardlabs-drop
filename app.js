@@ -206,38 +206,75 @@
     });
   }
 
-  /* Variant B — DM → lead card */
-  const leadRun = document.getElementById("lead-run");
-  if (leadRun) {
-    leadRun.addEventListener("click", async () => {
-      leadRun.disabled = true;
-      const ack = document.getElementById("lead-ack");
-      const card = document.getElementById("lead-card");
-      const book = document.getElementById("lead-book");
-      const status = document.getElementById("lead-status");
-      if (ack) ack.hidden = true;
-      if (card) card.hidden = true;
-      if (book) book.hidden = true;
+  /* Variant B — Gmail photo dump cadence */
+  const dumpRun = document.getElementById("dump-run");
+  const dumpModeStandard = document.getElementById("dump-mode-standard");
+  const dumpModeBoost = document.getElementById("dump-mode-boost");
+
+  function setDumpMode(boost) {
+    if (dumpModeStandard) {
+      dumpModeStandard.classList.toggle("on", !boost);
+      dumpModeStandard.setAttribute("aria-pressed", String(!boost));
+    }
+    if (dumpModeBoost) {
+      dumpModeBoost.classList.toggle("on", boost);
+      dumpModeBoost.setAttribute("aria-pressed", String(boost));
+    }
+  }
+
+  if (dumpModeStandard) {
+    dumpModeStandard.addEventListener("click", () => setDumpMode(false));
+  }
+  if (dumpModeBoost) {
+    dumpModeBoost.addEventListener("click", () => setDumpMode(true));
+  }
+
+  if (dumpRun) {
+    dumpRun.addEventListener("click", async () => {
+      dumpRun.disabled = true;
+      const gmail = document.getElementById("dump-gmail");
+      const queue = document.getElementById("dump-queue");
+      const chips = document.getElementById("dump-chips");
+      const status = document.getElementById("dump-status");
+      const boost = dumpModeBoost && dumpModeBoost.classList.contains("on");
+      if (gmail) gmail.hidden = true;
+      if (queue) queue.hidden = true;
+      if (chips) chips.innerHTML = "";
       if (status) {
         status.hidden = false;
-        status.textContent = "Auto-ack drafting…";
+        status.textContent = "Routing camera roll → Gmail…";
       }
       await delay(450);
-      if (ack) ack.hidden = false;
-      if (status) status.textContent = "Logging lead to CRM / sheet…";
+      if (gmail) gmail.hidden = false;
+      if (status) status.textContent = "Photo dump · 4 job shots landed in Gmail.";
       await delay(500);
-      if (card) card.hidden = false;
-      await delay(350);
-      if (book) book.hidden = false;
-      if (status) status.textContent = "Lead captured · book chip ready.";
-      leadRun.disabled = false;
+      if (queue) queue.hidden = false;
+      if (status) status.textContent = "AI queue building posts…";
+      await delay(450);
+      const schedule = boost
+        ? ["Mon 9am · Boost", "Tue 9am · Boost", "Wed 12pm · Boost", "Thu 9am · Boost", "Fri 4pm · Boost"]
+        : ["Mon 9am · 3×/week", "Wed 12pm · 3×/week", "Fri 4pm · 3×/week"];
+      if (chips) {
+        for (const label of schedule) {
+          await delay(280);
+          const chip = document.createElement("span");
+          chip.className = "cal-chip";
+          chip.textContent = label;
+          chips.appendChild(chip);
+        }
+      }
+      if (status) {
+        status.textContent = boost
+          ? "Boost performance on — higher cadence scheduled."
+          : "Scheduled 3× per week from Gmail photo dump.";
+      }
+      dumpRun.disabled = false;
     });
   }
 
-  /* Variant C — Voice → Sheets → AI → Post */
+  /* Variant C — Voice → Sheets → AI → Gmail ghostwriter */
   const voiceRun = document.getElementById("voice-run");
   const voiceSteps = qsa("[data-voice-step]");
-  const voicePlatforms = qsa("#voice-platforms .toggle");
 
   function setVoiceStep(n) {
     voiceSteps.forEach((el) => {
@@ -253,44 +290,24 @@
       voiceRun.disabled = true;
       const toast = document.getElementById("voice-toast");
       const preview = document.getElementById("voice-preview");
-      const chips = document.getElementById("voice-chips");
       if (toast) {
         toast.hidden = false;
         toast.textContent = "Recording field note…";
       }
       if (preview) preview.hidden = true;
-      if (chips) chips.innerHTML = "";
       setVoiceStep(1);
       await delay(550);
       setVoiceStep(2);
       if (toast) toast.textContent = "Saved to Sheets · transcribed.";
       await delay(550);
       setVoiceStep(3);
-      if (toast) toast.textContent = "AI drafting caption + assets…";
+      if (toast) toast.textContent = "AI creating image + ghostwriter script…";
       await delay(550);
       setVoiceStep(4);
       if (preview) preview.hidden = false;
-      const active = voicePlatforms.filter((t) => t.classList.contains("on")).map((t) => t.dataset.platform);
-      const labels = {
-        ig: "IG · Thu 9am",
-        li: "LinkedIn · Thu 10am",
-        x: "X · Thu 10am",
-        fb: "FB · Thu 11am",
-      };
-      if (chips) {
-        for (const p of active) {
-          await delay(280);
-          const chip = document.createElement("span");
-          chip.className = "cal-chip";
-          chip.textContent = labels[p] || p;
-          chips.appendChild(chip);
-        }
-      }
       if (toast) {
         toast.textContent =
-          active.length
-            ? "Posted path ready → " + active.length + " platform" + (active.length > 1 ? "s" : "") + "."
-            : "AI draft ready — pick platforms to grow.";
+          "Gmail delivered — image attachment + brand-tone ghostwriter ready to approve/post.";
       }
       voiceRun.disabled = false;
     });
