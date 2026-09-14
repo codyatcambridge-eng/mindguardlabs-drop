@@ -1154,7 +1154,7 @@ h4 { font-size: 1.05rem; font-family: var(--font); letter-spacing: 0; }
 }
 .nova-note { margin-top: 1rem; max-width: 42rem; }
 
-/* —— V5 Social Engine switcher —— */
+/* —— V6 Social Engine switcher —— */
 .social-switcher {
   display: flex;
   flex-wrap: wrap;
@@ -1559,3 +1559,40 @@ h4 { font-size: 1.05rem; font-family: var(--font); letter-spacing: 0; }
   border-color: rgba(62, 207, 142, 0.4);
   box-shadow: 0 0 0 1px rgba(62, 207, 142, 0.12);
 }
+
+/* —— V6 Social Engine extras —— */
+.set-done-status {
+  margin: 0.85rem 0 0;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(62, 207, 142, 0.35);
+  background: rgba(62, 207, 142, 0.1);
+  color: #9aefc6;
+  font-size: 0.88rem;
+}
+.set-done-status strong { color: #c8f7dc; }
+.cadence-chips { margin-bottom: 0.85rem; }
+.path-toggles { margin-bottom: 0.85rem; flex-wrap: wrap; }
+.social-bonus {
+  margin-top: 1.75rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px dashed rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.03);
+}
+.social-bonus-title {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.social-bonus-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.social-bonus-list li { margin: 0.35rem 0; }
+.social-bonus-list strong { color: var(--text); }
+.social-bonus-soft { list-style: none; margin-left: -1.15rem; padding-left: 0; margin-top: 0.75rem; font-size: 0.88rem; }
+
